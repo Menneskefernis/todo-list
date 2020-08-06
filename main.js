@@ -94,7 +94,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo */ \"./src/todo.js\");\n\n\nObject(_todo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo */ \"./src/todo.js\");\n\n\nconst something = Object(_todo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\n                    'Make a note',\n                    'I have to remember to make a note of something important',\n                    'Monday',\n                    1,\n                    'This is a top priority',\n                    false\n                  );\n\nconsole.log(something.checklist)\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
@@ -106,7 +106,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _tod
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nconst body = document.querySelector('body');\n\nconst john = () => {\n  body.textContent = 'Lone';\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (john);\n\n//# sourceURL=webpack:///./src/todo.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nconst todo = (title, description, dueDate, priority, notes, done) => {\n  return {title, description, dueDate, priority, notes, done};\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (todo);\n\n//# sourceURL=webpack:///./src/todo.js?");
 
 /***/ })
 
