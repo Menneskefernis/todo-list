@@ -1,7 +1,5 @@
-const body = document.querySelector('body');
-
-const john = () => {
-  body.textContent = 'Lone';
+const todo = (title, description, dueDate, priority, notes, done) => {
+  return {title, description, dueDate, priority, notes, done};
 }
 
-export default john;
+export default todo;
