@@ -86,6 +86,18 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/base.js":
+/*!*********************!*\
+  !*** ./src/base.js ***!
+  \*********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nconst elements = {\n  projectList: document.getElementById('project-list'),\n  addProjectForm: document.getElementById('add-project'),\n  addProjectInput: document.querySelector('#add-project input'),\n  addProjectBtn: document.querySelector('#add-project button')\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (elements);\n\n//# sourceURL=webpack:///./src/base.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -94,19 +106,43 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _todo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo */ \"./src/todo.js\");\n\n\nconst something = Object(_todo__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\n                    'Make a note',\n                    'I have to remember to make a note of something important',\n                    'Monday',\n                    1,\n                    'This is a top priority',\n                    false\n                  );\n\nconsole.log(something.checklist)\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ \"./src/base.js\");\n/* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./project */ \"./src/project.js\");\n/* harmony import */ var _projectsController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./projectsController */ \"./src/projectsController.js\");\n/* harmony import */ var _view__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./view */ \"./src/view.js\");\n\n\n\n\n\nconst addProject = (e) => {\n  e.preventDefault();\n  const projectName = _base__WEBPACK_IMPORTED_MODULE_0__[\"default\"].addProjectInput.value;\n  _projectsController__WEBPACK_IMPORTED_MODULE_2__[\"default\"].add(Object(_project__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(projectName));\n  Object(_view__WEBPACK_IMPORTED_MODULE_3__[\"renderProjects\"])(_projectsController__WEBPACK_IMPORTED_MODULE_2__[\"default\"].get());\n  _base__WEBPACK_IMPORTED_MODULE_0__[\"default\"].addProjectForm.reset();\n}\n\nconst Init = () => {\n  _projectsController__WEBPACK_IMPORTED_MODULE_2__[\"default\"].add(Object(_project__WEBPACK_IMPORTED_MODULE_1__[\"default\"])('My First Project'));\n  Object(_view__WEBPACK_IMPORTED_MODULE_3__[\"renderProjects\"])(_projectsController__WEBPACK_IMPORTED_MODULE_2__[\"default\"].get());\n};\n\nInit();\n\n_base__WEBPACK_IMPORTED_MODULE_0__[\"default\"].addProjectBtn.addEventListener('click', addProject);\n\n\n//const something = todo(\n//                    'Make a note',\n//                    'I have to remember to make a note of something important',\n//                    'Monday',\n//                    1,\n//                    'This is a top priority',\n//                    false\n//                  );\n//\n//console.log(something.dueDate)\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
-/***/ "./src/todo.js":
-/*!*********************!*\
-  !*** ./src/todo.js ***!
-  \*********************/
+/***/ "./src/project.js":
+/*!************************!*\
+  !*** ./src/project.js ***!
+  \************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nconst todo = (title, description, dueDate, priority, notes, done) => {\n  return {title, description, dueDate, priority, notes, done};\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (todo);\n\n//# sourceURL=webpack:///./src/todo.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nconst project = (title) => {\n  const todos = [];\n\n  const addTodo = (todo) => {\n    todos.shift(todo);\n  }\n\n  return {title, addTodo};\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (project);\n\n//# sourceURL=webpack:///./src/project.js?");
+
+/***/ }),
+
+/***/ "./src/projectsController.js":
+/*!***********************************!*\
+  !*** ./src/projectsController.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nconst Projects = (() => {\n  const projects = [];\n\n  const add = (project) => {\n    projects.unshift(project);\n  }\n\n  const get = () => {\n    return projects;\n  }\n\n  return {add, get};\n})();\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Projects);\n\n//# sourceURL=webpack:///./src/projectsController.js?");
+
+/***/ }),
+
+/***/ "./src/view.js":
+/*!*********************!*\
+  !*** ./src/view.js ***!
+  \*********************/
+/*! exports provided: renderProjects */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"renderProjects\", function() { return renderProjects; });\n/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ \"./src/base.js\");\n\n\nconst renderProjects = (projects) => {\n  _base__WEBPACK_IMPORTED_MODULE_0__[\"default\"].projectList.innerHTML = '';\n  projects.forEach(project => {\n    renderProject(project);\n  });\n}\n\nconst renderProject = project => {\n  const markup = `\n    <li>\n      <h3>${project.title}</h3>\n    </li>\n  `;\n\n  _base__WEBPACK_IMPORTED_MODULE_0__[\"default\"].projectList.insertAdjacentHTML('afterbegin', markup);\n}\n\n\n\n//# sourceURL=webpack:///./src/view.js?");
 
 /***/ })
 
