@@ -1,11 +1,18 @@
+const uniqid = require('uniqid');
+
 const project = (title) => {
   const todos = [];
+  const id = uniqid();
 
   const addTodo = (todo) => {
-    todos.shift(todo);
+    todos.unshift(todo);
   }
 
-  return {title, addTodo};
+  const getTodos = () => {
+    return todos;
+  }
+
+  return {title, id, getTodos, addTodo};
 }
 
 export default project;

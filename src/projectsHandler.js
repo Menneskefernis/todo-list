@@ -9,7 +9,12 @@ const Projects = (() => {
     return projects;
   }
 
-  return {add, get};
+  const find = (id) => {
+    const project = projects.find(project => project.id === id);
+    return project;
+  }
+
+  return {add, get, find};
 })();
 
 export default Projects;
