@@ -1,7 +1,8 @@
 const Projects = (() => {
   const projects = [];
+  let activeProject;
 
-  const add = (project) => {
+  const add = project => {
     projects.unshift(project);
   }
 
@@ -9,12 +10,20 @@ const Projects = (() => {
     return projects;
   }
 
-  const find = (id) => {
+  const find = id => {
     const project = projects.find(project => project.id === id);
     return project;
   }
 
-  return {add, get, find};
+  const setActive = project => {
+    activeProject = project;
+  }
+
+  const getActive = () => {
+    return activeProject;
+  }
+
+  return {add, get, find, setActive, getActive};
 })();
 
 export default Projects;

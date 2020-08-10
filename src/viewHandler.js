@@ -24,7 +24,6 @@ const renderTodo = todo => {
     <li class="todo">
       <div>
         <h4>${todo.title}</h4>
-        <p>${todo.description}</p>
         <p>Duedate: <em>${todo.dueDate}</em></p>
       </div>
       <input type="checkbox">
@@ -33,4 +32,11 @@ const renderTodo = todo => {
   elements.todoList.insertAdjacentHTML('afterbegin', markup);
 }
 
-export {renderProjects, renderTodos};
+const setTodoActive = (element) => {
+  const todoNodes = Array.from(elements.todoList.children);
+  
+  todoNodes.forEach(node => node.classList.remove('active'));
+  element.classList.add('active');
+}
+
+export {renderProjects, renderTodos, setTodoActive};

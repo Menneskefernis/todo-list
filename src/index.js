@@ -2,11 +2,11 @@ import todo from './todo';
 import elements from './base';
 import project from './project';
 import Projects from './projectsHandler';
-import {renderProjects, renderTodos} from './viewHandler';
+import {renderProjects, renderTodos, setTodoActive} from './viewHandler';
 
 const addProject = (e) => {
   e.preventDefault();
-  const projectName = elements.addProjectInput.value;
+  const projectName = elements.addProjectInput.value; //se på det her
   Projects.add(project(projectName));
   renderProjects(Projects.get());
   elements.addProjectForm.reset();
@@ -16,9 +16,24 @@ const openProject = (e) => {
   const target = e.target;
   if (target.matches('.project, .project *')) {
     const id = target.closest('li').dataset.id;
-    const todos = Projects.find(id).getTodos();
-    renderTodos(todos);
+    const project = Projects.find(id);
+    
+    Projects.setActive(project);
+    renderTodos(project.getTodos());
   }
+}
+
+const openTodo = (e) => {
+  const target = e.target;
+  if (target.matches('.todo, .todo *')) {
+    setTodoActive(target.closest('li'));
+  }
+}
+
+const addTodo = (e) => {
+  e.preventDefault();
+  const inputValues = elements.createTodoForm;
+  console.log(inputValues.title.value) //se på det her
 }
 
 const Init = () => {
@@ -57,3 +72,5 @@ Init();
 
 elements.addProjectBtn.addEventListener('click', addProject);
 elements.projectList.addEventListener('click', openProject);
+elements.todoList.addEventListener('click', openTodo);
+elements.addTodoBtn.addEventListener('click', addTodo);
