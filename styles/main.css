@@ -58,6 +58,17 @@ header {
   height: 130px;
 }
 
+button {
+  background: skyblue;
+  color: #f8f8f8;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  padding: 0 15px;
+  cursor: pointer;
+  height: 30px;
+}
+
 #content {
   display: -ms-grid;
   display: grid;
@@ -103,16 +114,6 @@ header {
   font-weight: bold;
 }
 
-#content #projects #add-project button {
-  background: skyblue;
-  color: #f8f8f8;
-  font-weight: bold;
-  border: none;
-  border-radius: 4px;
-  padding: 0 15px;
-  cursor: pointer;
-}
-
 #content #projects #project-list .project {
   padding: 20px 0;
   border-bottom: 1px solid skyblue;
@@ -124,7 +125,7 @@ header {
           box-shadow: none;
 }
 
-#content #projects #project-list .project:hover {
+#content #projects #project-list .project.active, #content #projects #project-list .project:hover {
   /*background: $lightBlue;*/
   -webkit-box-shadow: 0 2px 2px #f8f8f8 inset, 0 -2px 2px #f8f8f8 inset;
           box-shadow: 0 2px 2px #f8f8f8 inset, 0 -2px 2px #f8f8f8 inset;
@@ -181,26 +182,26 @@ header {
   cursor: pointer;
 }
 
-#content #create {
+#content #add {
   background: #f8f8f8;
   padding: 0 20px 20px 20px;
 }
 
-#content #create form > div {
+#content #add form > div {
   margin-bottom: 20px;
 }
 
-#content #create form > div label {
+#content #add form > div label {
   display: block;
   margin-bottom: 5px;
 }
 
-#content #create form > div #title,
-#content #create form > div #description {
+#content #add form > div #title,
+#content #add form > div #description {
   width: 100%;
 }
 
-#content #create form > div textarea {
+#content #add form > div textarea {
   resize: none;
 }
 /*# sourceMappingURL=main.css.map */
