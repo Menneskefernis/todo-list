@@ -2,39 +2,57 @@ import todo from './todo';
 import elements from './base';
 import project from './project';
 import Projects from './projectsHandler';
-import {renderProjects, renderTodos, setTodoActive} from './viewHandler';
+import {ProjectsView, TodosView} from './viewHandler';
 
 const addProject = (e) => {
   e.preventDefault();
-  const projectName = elements.addProjectInput.value; //se på det her
-  Projects.add(project(projectName));
-  renderProjects(Projects.get());
+  const projectName = ProjectsView.getFormInput();
+  const proj = project(projectName);
+  Projects.add(proj);
+  
+  ProjectsView.render(Projects.get());
   elements.addProjectForm.reset();
 }
 
 const openProject = (e) => {
   const target = e.target;
-  if (target.matches('.project, .project *')) {
+  if (target.matches('.project, .project *')) {    
+
     const id = target.closest('li').dataset.id;
     const project = Projects.find(id);
-    
+    console.log(document.querySelector(`[data-id='${id}']`)); // Her
+
     Projects.setActive(project);
-    renderTodos(project.getTodos());
+    ProjectsView.setActiveProject(target.closest('li'));
+    TodosView.render(project.getTodos());
   }
 }
 
 const openTodo = (e) => {
   const target = e.target;
   if (target.matches('.todo, .todo *')) {
-    setTodoActive(target.closest('li'));
+    TodosView.setActiveTodo(target.closest('li'));
   }
 }
 
 const addTodo = (e) => {
   e.preventDefault();
-  const inputValues = elements.createTodoForm;
-  console.log(inputValues.title.value) //se på det her
+  const inputValues = TodosView.getFormInput();
+  const proj = Projects.getActive();
+  
+  proj.addTodo(
+    todo(
+      inputValues['title'].value,
+      'Some description that is necessary',
+      inputValues['due-date'].value
+    )
+  );
+
+  TodosView.render(proj.getTodos());
+  elements.addTodoForm.reset();
 }
+
+
 
 const Init = () => {
   const item1 = todo(
@@ -65,7 +83,10 @@ const Init = () => {
 
   Projects.add(proj1);
   Projects.add(proj2);
-  renderProjects(Projects.get());
+  ProjectsView.render(Projects.get());
+
+  Projects.setActive(proj1);
+  TodosView.render(proj1.getTodos());
 };
 
 Init();
