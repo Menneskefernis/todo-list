@@ -48,6 +48,10 @@ table {
 $white: rgb(248, 248, 248);
 $lightBlue: skyblue;
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -68,7 +72,24 @@ button {
   height: 30px;
 }
 
+input {
+  height: 30px;
+}
+
+input,
+textarea {
+  border-radius: 4px;
+  background: white;
+  outline: none;
+  border: none;
+
+  &:focus {
+    box-shadow: 0 0 2px 2px $lightBlue inset;
+  }
+}
+
 #content {
+  position: relative;
   display: grid;
   grid-template-columns: 400px auto 400px;
   height: 100vh;
@@ -81,6 +102,12 @@ button {
     font-weight: bold;
   }
 
+  h4 {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
   #projects {
     display: block;
     background: steelblue;
@@ -89,24 +116,25 @@ button {
     font-weight: bold;
 
     #add-project {
-      display: flex;
       padding: 0 20px 20px 20px;
       border-bottom: 1px solid $lightBlue;
-      height: 30px;
-
-      input {
-        flex: 1;
-        margin-right: 5px;
-        border-radius: 4px;
-        outline: none;
-        border: none;
-        padding: 0 10px;
-        font-weight: bold;
+      form {
+        display: flex;
+        height: 30px;
+  
+        input {
+          flex: 1;
+          margin-right: 5px;
+          outline: none;
+          border: none;
+          padding: 0 10px;
+          font-weight: bold;
+        }
       }
+
     }
 
     #project-list {
-      
       .project {
         padding: 20px 0;
         border-bottom: 1px solid $lightBlue;
@@ -150,12 +178,6 @@ button {
         box-shadow: 2px 2px 3px $lightBlue inset, -2px -2px 3px $lightBlue inset;
       }
 
-      h4 {
-        font-weight: bold;
-        font-size: 18px;
-        margin-bottom: 8px;
-      }
-
       p {
         margin-top: 10px;
         
@@ -194,13 +216,59 @@ button {
         margin-bottom: 5px;
       }
 
+      #title {
+        padding: 0 10px;
+      }
+
+      #description {
+        padding: 10px;
+        resize: none;
+      }
+
       #title,
       #description {
         width: 100%;
       }
+    }
+  }
 
-      textarea {
-        resize: none;
+  #details {
+    position: absolute;
+    height: 100%;
+    width: 0;
+    right: 0;
+    background: $white;
+    transition: all 0.3s;
+    overflow: hidden;
+
+
+    &.overlay {
+      width: 400px;
+      box-shadow: -1px 0 2px $lightBlue;
+      padding: 0 20px 20px 20px;
+    }
+
+    i {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      color: $lightBlue;
+      font-size: 25px;
+      cursor: pointer;
+    }
+
+    #details-list {
+      >div {
+        margin-bottom: 20px;
+
+        h5 {
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+
+        p {
+          overflow-wrap: break-word;
+        }
       }
     }
   }

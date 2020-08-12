@@ -2,7 +2,7 @@ import todo from './todo';
 import elements from './base';
 import project from './project';
 import Projects from './projectsHandler';
-import {ProjectsView, TodosView} from './viewHandler';
+import {ProjectsView, TodosView, DetailsView} from './viewHandler';
 
 const addProject = (e) => {
   e.preventDefault();
@@ -37,7 +37,12 @@ const findProjectOnEvent = e => {
 const openTodo = (e) => {
   const target = e.target;
   if (target.matches('.todo, .todo *')) {
-    TodosView.setActiveTodo(target.closest('li'));
+    const element = target.closest('li');
+    TodosView.setActiveTodo(element);
+    
+    const id = element.dataset.id;
+    const todo = Projects.getActive().findTodo(id);
+    DetailsView.showDetails(todo);
   }
 }
 
@@ -82,8 +87,8 @@ const Init = () => {
   const proj1 = project('My First Project');
   const proj2 = project('My Second Project');
 
-  //proj1.addTodo(item1);
-  //proj1.addTodo(item2);
+  proj1.addTodo(item1);
+  proj1.addTodo(item2);
 
   proj2.addTodo(item3);
 

@@ -6,6 +6,7 @@
   <title>Todo list</title>
 
   <link rel="stylesheet" href="./styles/main.css">
+  <script src="https://kit.fontawesome.com/27eb72c98e.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <header></header>
@@ -13,10 +14,13 @@
     <section id="projects">
       
       <h2>Projects</h2>
-      <form id="add-project">
-        <input type="text">
-        <button type="submit">CREATE</button>
-      </form>
+      <div id="add-project">
+        <form>
+          <input type="text">
+          <button type="submit">CREATE</button>
+        </form>
+      </div>
+
       <ul id="project-list"></ul>
      
     </section>
@@ -44,8 +48,16 @@
       </form>
 
     </section>
+    <aside id="details">
+      <i class="fas fa-arrow-circle-right"></i>
+      <h2>Details</h2>
+      <div id="details-list"></div>
+    </aside>
+      
+
   </section>
 
+  
 
   <script src="main.js"></script>
 </body>

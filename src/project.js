@@ -12,7 +12,11 @@ const project = (title) => {
     return todos;
   }
 
-  return {title, id, getTodos, addTodo};
+  const findTodo = id => {
+    return todos.find(todo => todo.id === id);
+  }
+
+  return {title, id, getTodos, addTodo, findTodo};
 }
 
 export default project;

@@ -45,7 +45,7 @@ const TodosView = (() => {
     const markup = `
       <div id="default">
         <p>Go ahead!</p>
-        <p>Add a thing todo from the form to the right.</p>
+        <p>Add a thing to-do from the form to the right.</p>
       </div>
     `;
     elements.todoList.innerHTML = markup;
@@ -53,7 +53,7 @@ const TodosView = (() => {
   
   const renderTodo = todo => {
     const markup = `
-      <li class="todo">
+      <li class="todo" data-id="${todo.id}">
         <div>
           <h4>${todo.title}</h4>
           <p>Duedate: <em>${todo.dueDate}</em></p>
@@ -78,4 +78,32 @@ const TodosView = (() => {
   return {render, setActiveTodo, getFormInput};
 })();
 
-export {ProjectsView, TodosView};
+
+const DetailsView = (() => {
+  const showDetails = (todo) => {
+    elements.detailsOverlay.classList.add('overlay');
+    renderDetails(todo);
+  }
+
+  const renderDetails = todo => {
+    const markup = `
+      <div>
+        <h5>Title:</h5>
+        <p>${todo.title}</p>
+      </div>
+      <div>
+        <h5>Description:</h5>
+        <p>${todo.description}</p>
+      </div>
+      <div>
+        <h5>Due date:</h5>
+        <p>${todo.dueDate}</p>
+      </div>
+    `;
+    elements.detailsList.innerHTML = markup;
+  }
+
+  return {showDetails};
+})();
+
+export {ProjectsView, TodosView, DetailsView};
