@@ -130,8 +130,10 @@ button {
 
   #todo-list {
     margin: 40px 40px 0;
-    
+    text-align: center;
+
     .todo {
+      text-align: initial;
       display: grid;
       grid-template-columns: auto auto;
       justify-content: space-between;
@@ -166,6 +168,17 @@ button {
         width: 30px;
         cursor: pointer;
       }
+    }
+
+    #default {
+      display: inline-block;
+      background: $white;
+      border-radius: 4px;
+      margin-top: 150px;
+      padding: 20px 40px;
+      font-size: 28px;
+      text-align: center;
+      line-height: 2;
     }
   }
 
