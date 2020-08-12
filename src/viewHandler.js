@@ -33,8 +33,22 @@ const ProjectsView = (() => {
 
 const TodosView = (() => {
   const render = todos => {
-    elements.todoList.innerHTML = '';
-    todos.forEach(todo => renderTodo(todo));
+    if (todos.length <= 0) {
+      renderDefault();
+    } else {
+      elements.todoList.innerHTML = '';
+      todos.forEach(todo => renderTodo(todo));
+    }
+  }
+
+  const renderDefault = () => {
+    const markup = `
+      <div id="default">
+        <p>Go ahead!</p>
+        <p>Add a thing todo from the form to the right.</p>
+      </div>
+    `;
+    elements.todoList.innerHTML = markup;
   }
   
   const renderTodo = todo => {

@@ -26,9 +26,8 @@ const openProject = (input) => {
 
 const findProjectOnEvent = e => {
   const target = e.target;
-  console.log('fail')
+  
   if (target.matches('.project, .project *')) {    
-
     const id = target.closest('li').dataset.id;
     return Projects.find(id);
   }
@@ -83,8 +82,8 @@ const Init = () => {
   const proj1 = project('My First Project');
   const proj2 = project('My Second Project');
 
-  proj1.addTodo(item1);
-  proj1.addTodo(item2);
+  //proj1.addTodo(item1);
+  //proj1.addTodo(item2);
 
   proj2.addTodo(item3);
 
