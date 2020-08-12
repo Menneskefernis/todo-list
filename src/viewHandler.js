@@ -15,18 +15,19 @@ const ProjectsView = (() => {
     elements.projectList.insertAdjacentHTML('afterbegin', markup);
   }
 
-  const setActiveProject = (element) => {
+  const select = (project) => {
     const projectNodes = Array.from(elements.projectList.children);
     
     projectNodes.forEach(node => node.classList.remove('active'));
-    element.classList.add('active');
+    const projectNode = document.querySelector(`[data-id='${project.id}']`);
+    projectNode.classList.add('active');
   }
 
   const getFormInput = () => {
     return elements.addProjectInput.value;
   }
 
-  return {render, getFormInput, setActiveProject};
+  return {render, getFormInput, select};
 })();
 
 
@@ -62,10 +63,5 @@ const TodosView = (() => {
 
   return {render, setActiveTodo, getFormInput};
 })();
-
-
-
-
-
 
 export {ProjectsView, TodosView};

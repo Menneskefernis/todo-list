@@ -11,22 +11,29 @@ const addProject = (e) => {
   Projects.add(proj);
   
   ProjectsView.render(Projects.get());
+  openProject(proj);
   elements.addProjectForm.reset();
 }
 
-const openProject = (e) => {
+const openProject = (input) => {
+  let project;
+  input.target ? project = findProjectOnEvent(input) : project = input;
+  
+  Projects.setActive(project);
+  ProjectsView.select(project);
+  TodosView.render(project.getTodos());
+}
+
+const findProjectOnEvent = e => {
   const target = e.target;
+  console.log('fail')
   if (target.matches('.project, .project *')) {    
 
     const id = target.closest('li').dataset.id;
-    const project = Projects.find(id);
-    console.log(document.querySelector(`[data-id='${id}']`)); // Her
-
-    Projects.setActive(project);
-    ProjectsView.setActiveProject(target.closest('li'));
-    TodosView.render(project.getTodos());
+    return Projects.find(id);
   }
 }
+
 
 const openTodo = (e) => {
   const target = e.target;
