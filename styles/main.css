@@ -49,6 +49,11 @@ table {
 }
 
 /* My code */
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -69,7 +74,26 @@ button {
   height: 30px;
 }
 
+input {
+  height: 30px;
+}
+
+input,
+textarea {
+  border-radius: 4px;
+  background: white;
+  outline: none;
+  border: none;
+}
+
+input:focus,
+textarea:focus {
+  -webkit-box-shadow: 0 0 2px 2px skyblue inset;
+          box-shadow: 0 0 2px 2px skyblue inset;
+}
+
 #content {
+  position: relative;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 400px auto 400px;
@@ -85,6 +109,12 @@ button {
   font-weight: bold;
 }
 
+#content h4 {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
 #content #projects {
   display: block;
   background: steelblue;
@@ -94,20 +124,22 @@ button {
 }
 
 #content #projects #add-project {
+  padding: 0 20px 20px 20px;
+  border-bottom: 1px solid skyblue;
+}
+
+#content #projects #add-project form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 0 20px 20px 20px;
-  border-bottom: 1px solid skyblue;
   height: 30px;
 }
 
-#content #projects #add-project input {
+#content #projects #add-project form input {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
   margin-right: 5px;
-  border-radius: 4px;
   outline: none;
   border: none;
   padding: 0 10px;
@@ -165,12 +197,6 @@ button {
           box-shadow: 2px 2px 3px skyblue inset, -2px -2px 3px skyblue inset;
 }
 
-#content #todo-list .todo h4 {
-  font-weight: bold;
-  font-size: 18px;
-  margin-bottom: 8px;
-}
-
 #content #todo-list .todo p {
   margin-top: 10px;
 }
@@ -209,12 +235,57 @@ button {
   margin-bottom: 5px;
 }
 
+#content #add form > div #title {
+  padding: 0 10px;
+}
+
+#content #add form > div #description {
+  padding: 10px;
+  resize: none;
+}
+
 #content #add form > div #title,
 #content #add form > div #description {
   width: 100%;
 }
 
-#content #add form > div textarea {
-  resize: none;
+#content #details {
+  position: absolute;
+  height: 100%;
+  width: 0;
+  right: 0;
+  background: #f8f8f8;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+#content #details.overlay {
+  width: 400px;
+  -webkit-box-shadow: -1px 0 2px skyblue;
+          box-shadow: -1px 0 2px skyblue;
+  padding: 0 20px 20px 20px;
+}
+
+#content #details i {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  color: skyblue;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+#content #details #details-list > div {
+  margin-bottom: 20px;
+}
+
+#content #details #details-list > div h5 {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#content #details #details-list > div p {
+  overflow-wrap: break-word;
 }
 /*# sourceMappingURL=main.css.map */
