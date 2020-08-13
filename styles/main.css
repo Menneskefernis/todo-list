@@ -60,7 +60,22 @@ body {
 
 header {
   background: skyblue;
-  height: 130px;
+  height: 100px;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+header h1 {
+  margin-left: 20px;
+  font-size: 48px;
+  font-family: 'Gloria Hallelujah', cursive;
 }
 
 button {
@@ -147,8 +162,16 @@ textarea:focus {
 }
 
 #content #projects #project-list .project {
-  padding: 20px 0;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 20px 20px 20px 0;
   border-bottom: 1px solid skyblue;
+  background: steelblue;
   font-size: 18px;
   cursor: pointer;
   -webkit-transition: all 0.3s;
@@ -157,10 +180,25 @@ textarea:focus {
           box-shadow: none;
 }
 
-#content #projects #project-list .project.active, #content #projects #project-list .project:hover {
-  /*background: $lightBlue;*/
+#content #projects #project-list .project:hover {
   -webkit-box-shadow: 0 2px 2px #f8f8f8 inset, 0 -2px 2px #f8f8f8 inset;
           box-shadow: 0 2px 2px #f8f8f8 inset, 0 -2px 2px #f8f8f8 inset;
+}
+
+#content #projects #project-list .project.active {
+  background: skyblue;
+  -webkit-box-shadow: 0 2px 2px #f8f8f8 inset, 0 -2px 2px #f8f8f8 inset;
+          box-shadow: 0 2px 2px #f8f8f8 inset, 0 -2px 2px #f8f8f8 inset;
+}
+
+#content #projects #project-list .project .del-project-btn {
+  color: rgba(148, 148, 148, 0);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+#content #projects #project-list .project:hover .del-project-btn {
+  color: #f8f8f8;
 }
 
 #content #projects #project-list .project h3 {
@@ -174,6 +212,7 @@ textarea:focus {
 
 #content #todo-list .todo {
   text-align: initial;
+  position: relative;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: auto auto;
@@ -181,6 +220,9 @@ textarea:focus {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border: 1px solid skyblue;
   border-radius: 4px;
   padding: 15px;
@@ -208,6 +250,19 @@ textarea:focus {
 #content #todo-list .todo input {
   width: 30px;
   cursor: pointer;
+}
+
+#content #todo-list .todo .del-todo-btn {
+  position: absolute;
+  color: rgba(0, 0, 0, 0);
+  right: 5px;
+  top: 3px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+#content #todo-list .todo:hover .del-todo-btn {
+  color: #323232;
 }
 
 #content #todo-list #default {
@@ -265,7 +320,7 @@ textarea:focus {
   -webkit-box-shadow: -1px 0 2px skyblue;
           box-shadow: -1px 0 2px skyblue;
   padding: 0 20px 20px 20px;
-  border-radius: 8px 0 0 8px;
+  border-radius: 8px 0 0;
 }
 
 #content #details #close-details-btn {
@@ -277,8 +332,13 @@ textarea:focus {
   cursor: pointer;
 }
 
+#content #details #details-list {
+  margin-top: 40px;
+}
+
 #content #details #details-list > div {
   margin-bottom: 20px;
+  width: 380px;
 }
 
 #content #details #details-list > div h5 {
