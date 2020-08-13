@@ -265,9 +265,10 @@ textarea:focus {
   -webkit-box-shadow: -1px 0 2px skyblue;
           box-shadow: -1px 0 2px skyblue;
   padding: 0 20px 20px 20px;
+  border-radius: 8px 0 0 8px;
 }
 
-#content #details i {
+#content #details #close-details-btn {
   position: absolute;
   left: 20px;
   top: 20px;

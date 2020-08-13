@@ -246,9 +246,10 @@ textarea {
       width: 400px;
       box-shadow: -1px 0 2px $lightBlue;
       padding: 0 20px 20px 20px;
+      border-radius: 8px 0 0 8px;
     }
 
-    i {
+    #close-details-btn {
       position: absolute;
       left: 20px;
       top: 20px;

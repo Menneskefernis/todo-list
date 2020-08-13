@@ -65,17 +65,20 @@ const TodosView = (() => {
   }
 
   const setActiveTodo = (element) => {
-    const todoNodes = Array.from(elements.todoList.children);
-    
-    todoNodes.forEach(node => node.classList.remove('active'));
+    clearActiveTodo();
     element.classList.add('active');
+  }
+
+  const clearActiveTodo = () => {
+    const todoNodes = Array.from(elements.todoList.children);
+    todoNodes.forEach(node => node.classList.remove('active'));
   }
 
   const getFormInput = () => {
     return elements.addTodoForm;
   }
 
-  return {render, setActiveTodo, getFormInput};
+  return {render, setActiveTodo, clearActiveTodo, getFormInput};
 })();
 
 
@@ -103,7 +106,12 @@ const DetailsView = (() => {
     elements.detailsList.innerHTML = markup;
   }
 
-  return {showDetails};
+  const hideDetails = () => {
+    console.log('john')
+    elements.detailsOverlay.classList.remove('overlay');
+  }
+
+  return {showDetails, hideDetails};
 })();
 
 export {ProjectsView, TodosView, DetailsView};

@@ -22,6 +22,7 @@ const openProject = (input) => {
   Projects.setActive(project);
   ProjectsView.select(project);
   TodosView.render(project.getTodos());
+  closeTodo();
 }
 
 const findProjectOnEvent = e => {
@@ -46,6 +47,11 @@ const openTodo = (e) => {
   }
 }
 
+const closeTodo = () => {
+  DetailsView.hideDetails();
+  TodosView.clearActiveTodo();
+}
+
 const addTodo = (e) => {
   e.preventDefault();
   const inputValues = TodosView.getFormInput();
@@ -53,8 +59,8 @@ const addTodo = (e) => {
   
   proj.addTodo(
     todo(
-      inputValues['title'].value,
-      'Some description that is necessary',
+      inputValues.title.value,
+      inputValues.description.value,
       inputValues['due-date'].value
     )
   );
@@ -97,6 +103,7 @@ const Init = () => {
   ProjectsView.render(Projects.get());
 
   Projects.setActive(proj1);
+  ProjectsView.select(proj1);
   TodosView.render(proj1.getTodos());
 };
 
@@ -106,3 +113,4 @@ elements.addProjectBtn.addEventListener('click', addProject);
 elements.projectList.addEventListener('click', openProject);
 elements.todoList.addEventListener('click', openTodo);
 elements.addTodoBtn.addEventListener('click', addTodo);
+elements.closeDetailsBtn.addEventListener('click', closeTodo);
