@@ -46,7 +46,8 @@ table {
 /* My code */
 
 $white: rgba(248, 248, 248, 1);
-$lightBlue: skyblue;
+$lightBlue: rgba(135, 206, 235, 1);
+$transition: all 0.3s;
 
 * {
   box-sizing: border-box;
@@ -153,7 +154,7 @@ textarea {
         background: steelblue;
         font-size: 18px;
         cursor: pointer;
-        transition: all 0.3s;
+        transition: $transition;
         box-shadow: none;
 
         &:hover {
@@ -168,7 +169,7 @@ textarea {
 
         .del-project-btn {
           color: rgba(148, 148, 148, 0);
-          transition: all 0.3s;
+          transition: $transition;
         }
 
         &:hover .del-project-btn {
@@ -187,6 +188,7 @@ textarea {
     text-align: center;
 
     .todo {
+      position: relative;
       text-align: initial;
       position: relative;
       display: grid;
@@ -198,7 +200,7 @@ textarea {
       padding: 15px;
       cursor: pointer;
       box-shadow: none;
-      transition: all 0.3s;
+      transition: $transition;
       margin-bottom: 10px;
 
       &.active,
@@ -222,13 +224,41 @@ textarea {
       .del-todo-btn {
         position: absolute;
         color: rgba(0, 0, 0, 0);
-        right: 5px;
+        right: 6px;
         top: 3px;
-        transition: all 0.3s;
+        transition: $transition;
       }
 
       &:hover .del-todo-btn {
         color: rgba(50, 50, 50, 1);
+      }
+
+      .checkmark {
+        margin-right: 20px;
+        font-size: 35px;
+        color: $lightBlue;
+      }
+
+      .fa-caret-up,
+      .fa-caret-down {
+        position: absolute;
+        left: -25px;
+        color: rgba(0, 0, 0, 0);
+        transition: $transition;
+        font-size: 25px;
+      }
+
+      .fa-caret-up {
+        top: 10px;
+      }
+
+      .fa-caret-down {
+        bottom: 10px;
+      }
+
+      &:hover .fa-caret-up,
+      &:hover .fa-caret-down {
+        color: $lightBlue;
       }
     }
 
@@ -278,7 +308,7 @@ textarea {
     width: 0;
     right: 0;
     background: $white;
-    transition: all 0.3s;
+    transition: $transition;
     overflow: hidden;
 
 
