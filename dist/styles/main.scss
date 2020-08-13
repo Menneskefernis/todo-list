@@ -45,7 +45,7 @@ table {
 
 /* My code */
 
-$white: rgb(248, 248, 248);
+$white: rgba(248, 248, 248, 1);
 $lightBlue: skyblue;
 
 * {
@@ -58,7 +58,16 @@ body {
 
 header {
   background: $lightBlue;
-  height: 130px;
+  height: 100px;
+  justify-content: start;
+  align-items: center;
+  display: flex;
+
+  h1 {
+    margin-left: 20px;
+    font-size: 48px;
+    font-family: 'Gloria Hallelujah', cursive;
+  }
 }
 
 button {
@@ -136,17 +145,34 @@ textarea {
 
     #project-list {
       .project {
-        padding: 20px 0;
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+        padding: 20px 20px 20px 0;
         border-bottom: 1px solid $lightBlue;
+        background: steelblue;
         font-size: 18px;
         cursor: pointer;
         transition: all 0.3s;
         box-shadow: none;
 
-        &.active,
         &:hover {
-          /*background: $lightBlue;*/
+          
           box-shadow: 0 2px 2px $white inset, 0 -2px 2px $white inset;
+        }
+
+        &.active {
+          background: $lightBlue;
+          box-shadow: 0 2px 2px $white inset, 0 -2px 2px $white inset;
+        }
+
+        .del-project-btn {
+          color: rgba(148, 148, 148, 0);
+          transition: all 0.3s;
+        }
+
+        &:hover .del-project-btn {
+          color: $white;
         }
 
         h3 {
@@ -162,9 +188,11 @@ textarea {
 
     .todo {
       text-align: initial;
+      position: relative;
       display: grid;
       grid-template-columns: auto auto;
       justify-content: space-between;
+      align-items: center;
       border: 1px solid $lightBlue;
       border-radius: 4px;
       padding: 15px;
@@ -189,6 +217,18 @@ textarea {
       input {
         width: 30px;
         cursor: pointer;
+      }
+
+      .del-todo-btn {
+        position: absolute;
+        color: rgba(0, 0, 0, 0);
+        right: 5px;
+        top: 3px;
+        transition: all 0.3s;
+      }
+
+      &:hover .del-todo-btn {
+        color: rgba(50, 50, 50, 1);
       }
     }
 
@@ -246,7 +286,7 @@ textarea {
       width: 400px;
       box-shadow: -1px 0 2px $lightBlue;
       padding: 0 20px 20px 20px;
-      border-radius: 8px 0 0 8px;
+      border-radius: 8px 0 0;
     }
 
     #close-details-btn {
@@ -259,8 +299,10 @@ textarea {
     }
 
     #details-list {
+      margin-top: 40px;
       >div {
         margin-bottom: 20px;
+        width: 380px;
 
         h5 {
           font-weight: bold;

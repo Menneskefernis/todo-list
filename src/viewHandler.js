@@ -10,6 +10,9 @@ const ProjectsView = (() => {
     const markup = `
       <li class="project" data-id="${project.id}">
         <h3>${project.title}</h3>
+        <div class="del-project-btn">
+          <i class="far fa-times-circle"></i>
+        </div>
       </li>
     `;
     elements.projectList.insertAdjacentHTML('afterbegin', markup);
@@ -32,8 +35,10 @@ const ProjectsView = (() => {
 
 
 const TodosView = (() => {
-  const render = todos => {
-    if (todos.length <= 0) {
+  const render = (todos = '') => {
+    if (todos === '') {
+      elements.todoList.innerHTML = '';
+    } else if (todos.length <= 0) {
       renderDefault();
     } else {
       elements.todoList.innerHTML = '';
@@ -59,12 +64,15 @@ const TodosView = (() => {
           <p>Duedate: <em>${todo.dueDate}</em></p>
         </div>
         <input type="checkbox">
+        <div class="del-todo-btn">
+          <i class="fas fa-times"></i>
+        </div>
       </li>
     `;
     elements.todoList.insertAdjacentHTML('afterbegin', markup);
   }
 
-  const setActiveTodo = (element) => {
+  const setActive = (element) => {
     clearActiveTodo();
     element.classList.add('active');
   }
@@ -78,7 +86,7 @@ const TodosView = (() => {
     return elements.addTodoForm;
   }
 
-  return {render, setActiveTodo, clearActiveTodo, getFormInput};
+  return {render, setActive, clearActiveTodo, getFormInput};
 })();
 
 
@@ -107,7 +115,6 @@ const DetailsView = (() => {
   }
 
   const hideDetails = () => {
-    console.log('john')
     elements.detailsOverlay.classList.remove('overlay');
   }
 

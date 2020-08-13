@@ -1,9 +1,16 @@
+import project from "./project";
+
 const Projects = (() => {
   const projects = [];
   let activeProject;
 
   const add = project => {
     projects.unshift(project);
+  }
+
+  const remove = id => {
+    const index = projects.findIndex(project => project.id === id);
+    projects.splice(index, 1);
   }
 
   const get = () => {
@@ -23,7 +30,7 @@ const Projects = (() => {
     return activeProject;
   }
 
-  return {add, get, find, setActive, getActive};
+  return {add, remove, get, find, setActive, getActive};
 })();
 
 export default Projects;

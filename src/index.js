@@ -27,24 +27,43 @@ const openProject = (input) => {
 
 const findProjectOnEvent = e => {
   const target = e.target;
+  if (!target.matches('.project, .project *')) return; 
+    
+  const id = target.closest('li').dataset.id;
+  return Projects.find(id);
+}
+
+const deleteProject = (e) => {
+  const target = e.target;
+  if (!target.matches('.del-project-btn, .del-project-btn *')) return;
+  const id = target.closest('li').dataset.id;
   
-  if (target.matches('.project, .project *')) {    
-    const id = target.closest('li').dataset.id;
-    return Projects.find(id);
-  }
+  Projects.remove(id);
+  ProjectsView.render(Projects.get());
+  TodosView.render();
+  //openProject(Projects.get()[0]);
 }
 
 
-const openTodo = (e) => {
+const toggleTodo = (e) => {
   const target = e.target;
-  if (target.matches('.todo, .todo *')) {
-    const element = target.closest('li');
-    TodosView.setActiveTodo(element);
-    
-    const id = element.dataset.id;
-    const todo = Projects.getActive().findTodo(id);
-    DetailsView.showDetails(todo);
+  if (target.matches('.del-todo-btn, .del-todo-btn *')) return;
+  if (!target.matches('.todo, .todo *')) return;
+  
+  const element = target.closest('li');
+  if (element.classList.contains('active')) {
+    closeTodo();
+    return true;
+  } else {
+    openTodo(element);
   }
+}
+
+const openTodo = (element) => {
+  TodosView.setActive(element);
+  const id = element.dataset.id;
+  const todo = Projects.getActive().findTodo(id);
+  DetailsView.showDetails(todo);
 }
 
 const closeTodo = () => {
@@ -69,7 +88,15 @@ const addTodo = (e) => {
   elements.addTodoForm.reset();
 }
 
-
+const deleteTodo = (e) => {
+  const target = e.target;
+  if (!target.matches('.del-todo-btn, .del-todo-btn *')) return;
+  
+  const id = target.closest('li').dataset.id;
+  const project = Projects.getActive();
+  project.removeTodo(id);
+  TodosView.render(project.getTodos());
+}
 
 const Init = () => {
   const item1 = todo(
@@ -111,6 +138,8 @@ Init();
 
 elements.addProjectBtn.addEventListener('click', addProject);
 elements.projectList.addEventListener('click', openProject);
-elements.todoList.addEventListener('click', openTodo);
+elements.projectList.addEventListener('click', deleteProject);
+elements.todoList.addEventListener('click', toggleTodo);
+elements.todoList.addEventListener('click', deleteTodo);
 elements.addTodoBtn.addEventListener('click', addTodo);
 elements.closeDetailsBtn.addEventListener('click', closeTodo);
