@@ -9,8 +9,7 @@ const project = (title) => {
   }
 
   const removeTodo = (id) => {
-    const index = todos.findIndex(todo => todo.id === id);
-    todos.splice(index, 1);
+    todos.splice(findTodoIndex(id), 1);
   }
 
   const getTodos = () => {
@@ -21,7 +20,17 @@ const project = (title) => {
     return todos.find(todo => todo.id === id);
   }
 
-  return {title, id, getTodos, addTodo, findTodo, removeTodo};
+  const setTodoPriority = (id, direction) => {
+    const index = findTodoIndex(id);
+    const todo = todos.splice(index, 1)[0];
+    direction === 'up' ? todos.splice(index + 1, 0, todo) : todos.splice(index - 1, 0, todo);
+  }
+
+  const findTodoIndex = (id) => {
+    return todos.findIndex(todo => todo.id === id);
+  }
+
+  return {title, id, getTodos, addTodo, findTodo, removeTodo, setTodoPriority};
 }
 
 export default project;

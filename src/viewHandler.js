@@ -35,6 +35,7 @@ const ProjectsView = (() => {
 
 
 const TodosView = (() => {
+  
   const render = (todos = '') => {
     if (todos === '') {
       elements.todoList.innerHTML = '';
@@ -42,7 +43,18 @@ const TodosView = (() => {
       renderDefault();
     } else {
       elements.todoList.innerHTML = '';
-      todos.forEach(todo => renderTodo(todo));
+      todos.forEach(todo => {
+        renderTodo(todo, checkPriority(todos, todo));
+      }); 
+    }
+  }
+
+  const checkPriority = (todos, todo) => {
+    if (todos[0] === todo && todos[todos.length - 1] === todo) return null;
+    if (todos[0] === todo) {
+      return 'last';
+    } else if (todos[todos.length - 1] === todo) {
+      return 'first';
     }
   }
 
@@ -56,14 +68,22 @@ const TodosView = (() => {
     elements.todoList.innerHTML = markup;
   }
   
-  const renderTodo = todo => {
+  const renderTodo = (todo, priority) => {
+    const carets = `
+      ${priority === 'first' ? "" : `<i class="fas fa-caret-up"></i>`}
+      ${priority === 'last' ? "" : `<i class="fas fa-caret-down"></i>`} 
+    `;
+    
     const markup = `
       <li class="todo" data-id="${todo.id}">
+         
+        ${priority === null ? '' : carets}
+        
         <div>
           <h4>${todo.title}</h4>
           <p>Duedate: <em>${todo.dueDate}</em></p>
         </div>
-        <input type="checkbox">
+        <i class="far fa-square checkmark"></i>
         <div class="del-todo-btn">
           <i class="fas fa-times"></i>
         </div>
@@ -71,6 +91,8 @@ const TodosView = (() => {
     `;
     elements.todoList.insertAdjacentHTML('afterbegin', markup);
   }
+
+
 
   const setActive = (element) => {
     clearActiveTodo();

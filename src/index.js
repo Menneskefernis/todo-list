@@ -47,7 +47,7 @@ const deleteProject = (e) => {
 
 const toggleTodo = (e) => {
   const target = e.target;
-  if (target.matches('.del-todo-btn, .del-todo-btn *')) return;
+  if (target.matches('.del-todo-btn, .del-todo-btn *, .fa-caret-up, .fa-caret-down, .checkmark')) return;
   if (!target.matches('.todo, .todo *')) return;
   
   const element = target.closest('li');
@@ -98,6 +98,20 @@ const deleteTodo = (e) => {
   TodosView.render(project.getTodos());
 }
 
+const changePriority = (e) => {
+  const target = e.target;
+  if (target.matches('.fa-caret-up, .fa-caret-down')) {
+    let direction;
+    target.classList.contains('fa-caret-up') ? direction = 'up' : direction = 'down';
+
+    const id = target.closest('li').dataset.id;
+    const project = Projects.getActive();
+
+    project.setTodoPriority(id, direction);
+    TodosView.render(project.getTodos());
+  }
+}
+
 const Init = () => {
   const item1 = todo(
     'Make a note',
@@ -141,5 +155,6 @@ elements.projectList.addEventListener('click', openProject);
 elements.projectList.addEventListener('click', deleteProject);
 elements.todoList.addEventListener('click', toggleTodo);
 elements.todoList.addEventListener('click', deleteTodo);
+elements.todoList.addEventListener('click', changePriority);
 elements.addTodoBtn.addEventListener('click', addTodo);
 elements.closeDetailsBtn.addEventListener('click', closeTodo);

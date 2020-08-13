@@ -211,6 +211,7 @@ textarea:focus {
 }
 
 #content #todo-list .todo {
+  position: relative;
   text-align: initial;
   position: relative;
   display: -ms-grid;
@@ -255,7 +256,7 @@ textarea:focus {
 #content #todo-list .todo .del-todo-btn {
   position: absolute;
   color: rgba(0, 0, 0, 0);
-  right: 5px;
+  right: 6px;
   top: 3px;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -263,6 +264,35 @@ textarea:focus {
 
 #content #todo-list .todo:hover .del-todo-btn {
   color: #323232;
+}
+
+#content #todo-list .todo .checkmark {
+  margin-right: 20px;
+  font-size: 35px;
+  color: skyblue;
+}
+
+#content #todo-list .todo .fa-caret-up,
+#content #todo-list .todo .fa-caret-down {
+  position: absolute;
+  left: -25px;
+  color: rgba(0, 0, 0, 0);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  font-size: 25px;
+}
+
+#content #todo-list .todo .fa-caret-up {
+  top: 10px;
+}
+
+#content #todo-list .todo .fa-caret-down {
+  bottom: 10px;
+}
+
+#content #todo-list .todo:hover .fa-caret-up,
+#content #todo-list .todo:hover .fa-caret-down {
+  color: skyblue;
 }
 
 #content #todo-list #default {
