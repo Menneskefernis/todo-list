@@ -83,7 +83,10 @@ const TodosView = (() => {
           <h4>${todo.title}</h4>
           <p>Duedate: <em>${todo.dueDate}</em></p>
         </div>
-        <i class="far fa-square checkmark"></i>
+        <div class="checkmark">
+          <i class="far fa-square checkmark marker"></i>
+        </div>
+        <!--<input class="checkmark" type="checkbox">-->
         <div class="del-todo-btn">
           <i class="fas fa-times"></i>
         </div>
@@ -92,7 +95,9 @@ const TodosView = (() => {
     elements.todoList.insertAdjacentHTML('afterbegin', markup);
   }
 
-
+  const setCheckmark = (id) => {
+    console.log(id)
+  }
 
   const setActive = (element) => {
     clearActiveTodo();
@@ -108,7 +113,7 @@ const TodosView = (() => {
     return elements.addTodoForm;
   }
 
-  return {render, setActive, clearActiveTodo, getFormInput};
+  return {render, setActive, clearActiveTodo, getFormInput, setCheckmark};
 })();
 
 
