@@ -41,13 +41,12 @@ const deleteProject = (e) => {
   Projects.remove(id);
   ProjectsView.render(Projects.get());
   TodosView.render();
-  //openProject(Projects.get()[0]);
 }
 
 
 const toggleTodo = (e) => {
   const target = e.target;
-  if (target.matches('.del-todo-btn, .del-todo-btn *, .fa-caret-up, .fa-caret-down, .marker')) return;
+  if (target.matches('.del-todo-btn, .del-todo-btn *, .fa-caret-up, .fa-caret-down, .checkmark, .checkmark *')) return;
   if (!target.matches('.todo, .todo *')) return;
   
   const element = target.closest('li');
@@ -118,11 +117,10 @@ const getDirection = (target) => {
 
 const toggleCompleted = (e) => {
   const target = e.target;
-  console.log(target)
-  if (!target.matches('.marker')) return;
+  
+  if (!target.matches('.checkmark, .checkmark *')) return;
 
-  const id = target.closest('li').dataset.id;
-  TodosView.setCheckmark(id);
+  TodosView.setCheckmark(target.parentNode);
 }
 
 const Init = () => {

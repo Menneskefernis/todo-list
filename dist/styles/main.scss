@@ -203,6 +203,14 @@ textarea {
       transition: $transition;
       margin-bottom: 10px;
 
+      &.completed {
+        background: $lightBlue;
+
+        .checkmark {
+          color: $white;
+        }
+      }
+
       &.active,
       &:hover {
         box-shadow: 2px 2px 3px $lightBlue inset, -2px -2px 3px $lightBlue inset;

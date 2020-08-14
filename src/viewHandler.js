@@ -69,22 +69,17 @@ const TodosView = (() => {
   }
   
   const renderTodo = (todo, priority) => {
-    const carets = `
-      ${priority === 'first' ? "" : `<i class="fas fa-caret-up"></i>`}
-      ${priority === 'last' ? "" : `<i class="fas fa-caret-down"></i>`} 
-    `;
-    
     const markup = `
       <li class="todo" data-id="${todo.id}">
          
-        ${priority === null ? '' : carets}
+        ${insertCarets(priority)}
         
         <div>
           <h4>${todo.title}</h4>
           <p>Duedate: <em>${todo.dueDate}</em></p>
         </div>
         <div class="checkmark">
-          <i class="far fa-square checkmark marker"></i>
+          <i class="far fa-square "></i>
         </div>
         <!--<input class="checkmark" type="checkbox">-->
         <div class="del-todo-btn">
@@ -95,8 +90,23 @@ const TodosView = (() => {
     elements.todoList.insertAdjacentHTML('afterbegin', markup);
   }
 
-  const setCheckmark = (id) => {
-    console.log(id)
+  const insertCarets = (priority) => {
+    const carets = `
+      ${priority === 'first' ? "" : `<i class="fas fa-caret-up"></i>`}
+      ${priority === 'last' ? "" : `<i class="fas fa-caret-down"></i>`} 
+    `;
+
+    if (priority === null) {
+      return ''
+    } else {
+      return carets;
+    }
+  }
+
+  const setCheckmark = (element) => {
+    const todoNode = element.closest('li');
+    todoNode.classList.toggle('completed');
+    todoNode.classList.contains('completed') ? element.innerHTML = '<i class="far fa-check-square"></i>' : element.innerHTML = '<i class="far fa-square "></i>';
   }
 
   const setActive = (element) => {
