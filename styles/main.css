@@ -235,6 +235,14 @@ textarea:focus {
   margin-bottom: 10px;
 }
 
+#content #todo-list .todo.completed {
+  background: skyblue;
+}
+
+#content #todo-list .todo.completed .checkmark {
+  color: #f8f8f8;
+}
+
 #content #todo-list .todo.active, #content #todo-list .todo:hover {
   -webkit-box-shadow: 2px 2px 3px skyblue inset, -2px -2px 3px skyblue inset;
           box-shadow: 2px 2px 3px skyblue inset, -2px -2px 3px skyblue inset;
