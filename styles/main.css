@@ -130,6 +130,33 @@ textarea:focus {
   margin-bottom: 8px;
 }
 
+#content .todo-form {
+  margin-bottom: 20px;
+}
+
+#content .todo-form > div {
+  margin-bottom: 20px;
+}
+
+#content .todo-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#content .todo-form [name="title"] {
+  padding: 0 10px;
+}
+
+#content .todo-form [name="description"] {
+  padding: 10px;
+  resize: none;
+}
+
+#content .todo-form [name="title"],
+#content .todo-form [name="description"] {
+  width: 100%;
+}
+
 #content #projects {
   display: block;
   background: steelblue;
@@ -317,29 +344,6 @@ textarea:focus {
 #content #add {
   background: #f8f8f8;
   padding: 0 20px 20px 20px;
-}
-
-#content #add form > div {
-  margin-bottom: 20px;
-}
-
-#content #add form > div label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-#content #add form > div #title {
-  padding: 0 10px;
-}
-
-#content #add form > div #description {
-  padding: 10px;
-  resize: none;
-}
-
-#content #add form > div #title,
-#content #add form > div #description {
-  width: 100%;
 }
 
 #content #details {

@@ -49,6 +49,7 @@ $white: rgba(248, 248, 248, 1);
 $lightBlue: rgba(135, 206, 235, 1);
 $transition: all 0.3s;
 
+
 * {
   box-sizing: border-box;
 }
@@ -116,6 +117,33 @@ textarea {
     font-weight: bold;
     font-size: 18px;
     margin-bottom: 8px;
+  }
+
+  .todo-form {
+    margin-bottom: 20px;
+  
+    >div {
+      margin-bottom: 20px;
+    }
+  
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+  
+    [name="title"] {
+      padding: 0 10px;
+    }
+  
+    [name="description"] {
+      padding: 10px;
+      resize: none;
+    }
+  
+    [name="title"],
+    [name="description"] {
+      width: 100%;
+    }
   }
 
   #projects {
@@ -286,28 +314,7 @@ textarea {
     background: $white;
     padding: 0 20px 20px 20px;
 
-    form > div {
-      margin-bottom: 20px;
 
-      label {
-        display: block;
-        margin-bottom: 5px;
-      }
-
-      #title {
-        padding: 0 10px;
-      }
-
-      #description {
-        padding: 10px;
-        resize: none;
-      }
-
-      #title,
-      #description {
-        width: 100%;
-      }
-    }
   }
 
   #details {
@@ -318,6 +325,7 @@ textarea {
     background: $white;
     transition: $transition;
     overflow: hidden;
+
 
 
     &.overlay {
