@@ -88,6 +88,7 @@ const TodosView = (() => {
       </li>
     `;
     elements.todoList.insertAdjacentHTML('afterbegin', markup);
+    if (todo.completed()) toggleChecked(todo.id);
   }
 
   const insertCarets = (priority) => {
@@ -103,10 +104,12 @@ const TodosView = (() => {
     }
   }
 
-  const setCheckmark = (element) => {
-    const todoNode = element.closest('li');
+  const toggleChecked = (id) => {
+    const todoNode = document.querySelector(`[data-id='${id}']`);
+    const checkmarkNode = todoNode.querySelector('.checkmark');
+    
     todoNode.classList.toggle('completed');
-    todoNode.classList.contains('completed') ? element.innerHTML = '<i class="far fa-check-square"></i>' : element.innerHTML = '<i class="far fa-square "></i>';
+    todoNode.classList.contains('completed') ? checkmarkNode.innerHTML = '<i class="far fa-check-square"></i>' : checkmarkNode.innerHTML = '<i class="far fa-square "></i>';
   }
 
   const setActive = (element) => {
@@ -119,21 +122,25 @@ const TodosView = (() => {
     todoNodes.forEach(node => node.classList.remove('active'));
   }
 
+  return {render, setActive, clearActiveTodo, toggleChecked};
+})();
+
+const AddTodoView = (() => {
   const getFormInput = () => {
     return elements.addTodoForm;
   }
-
-  return {render, setActive, clearActiveTodo, getFormInput, setCheckmark};
+  return {getFormInput};
 })();
 
-
 const DetailsView = (() => {
+  
   const showDetails = (todo) => {
     elements.detailsOverlay.classList.add('overlay');
     renderDetails(todo);
   }
 
   const renderDetails = todo => {
+    elements.detailsList.innerHTML = '';
     const markup = `
       <div>
         <h5>Title:</h5>
@@ -147,15 +154,41 @@ const DetailsView = (() => {
         <h5>Due date:</h5>
         <p>${todo.dueDate}</p>
       </div>
+      <button id="edit-btn">EDIT</button>
+    `;
+    elements.detailsList.insertAdjacentHTML("afterbegin", markup);
+  }
+
+  const editDetails = (todo) => {
+    const markup = `
+      <form id="edit-todo-form" class="todo-form">
+        <div>
+          <label for="edit-title">Title:</label>
+          <input id="edit-title" name="title" type="text" value="${todo.title}">
+        </div>
+        <div>
+          <label for="edit-due-date">Due Date:</label>
+          <input id="edit-due-date" name="due-date" type="date" value="${todo.dueDate}">
+        </div>
+        <div>
+          <label for="edit-description">Description:</label>
+          <textarea name="description" id="edit-description" cols="30" rows="10">${todo.description}</textarea>
+        </div>
+        <button id="save-edit-btn" type="submit">SAVE</button>
+      </form>
     `;
     elements.detailsList.innerHTML = markup;
+  }
+
+  const getFormInput = () => {
+    return document.getElementById('edit-todo-form');
   }
 
   const hideDetails = () => {
     elements.detailsOverlay.classList.remove('overlay');
   }
 
-  return {showDetails, hideDetails};
+  return {showDetails, editDetails, hideDetails, getFormInput};
 })();
 
-export {ProjectsView, TodosView, DetailsView};
+export {ProjectsView, TodosView, AddTodoView, DetailsView};

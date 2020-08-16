@@ -3,6 +3,7 @@ const uniqid = require('uniqid');
 const project = (title) => {
   const todos = [];
   const id = uniqid();
+  let activeTodo;
 
   const addTodo = (todo) => {
     todos.unshift(todo);
@@ -20,6 +21,14 @@ const project = (title) => {
     return todos.find(todo => todo.id === id);
   }
 
+  const setActiveTodo = (todo) => {
+    activeTodo = todo;
+  }
+
+  const getActiveTodo = (todo) => {
+    return activeTodo;
+  }
+
   const setTodoPriority = (id, direction) => {
     const index = findTodoIndex(id);
     const todo = todos.splice(index, 1)[0];
@@ -30,7 +39,7 @@ const project = (title) => {
     return todos.findIndex(todo => todo.id === id);
   }
 
-  return {title, id, getTodos, addTodo, findTodo, removeTodo, setTodoPriority};
+  return {title, id, getTodos, addTodo, findTodo, removeTodo, setTodoPriority, setActiveTodo, getActiveTodo};
 }
 
 export default project;
