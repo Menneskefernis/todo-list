@@ -167,7 +167,7 @@ const Init = () => {
   const item1 = todo(
     'Make a note',
     'I have to remember to make a note of something important',
-    'Monday'
+    '2020-05-06'
   );
 
   const item2 = todo(
@@ -179,7 +179,7 @@ const Init = () => {
   const item3 = todo(
     'This is third todo',
     'Drink a beer and relax',
-    'Every day'
+    '2022-11-01'
   );
   
   const proj1 = project('My First Project');

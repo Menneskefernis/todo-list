@@ -1,3 +1,4 @@
+import {formatDistanceToNow, lightFormat} from 'date-fns';
 import elements from './base';
 
 const ProjectsView = (() => {
@@ -69,6 +70,7 @@ const TodosView = (() => {
   }
   
   const renderTodo = (todo, priority) => {
+    //lightFormat(new Date(todo.dueDate)
     const markup = `
       <li class="todo" data-id="${todo.id}">
          
@@ -76,7 +78,7 @@ const TodosView = (() => {
         
         <div>
           <h4>${todo.title}</h4>
-          <p>Duedate: <em>${todo.dueDate}</em></p>
+          <p>Duedate: <em>${formatDistanceToNow(new Date(todo.dueDate), { addSuffix: true })}</em></p>
         </div>
         <div class="checkmark">
           <i class="far fa-square "></i>

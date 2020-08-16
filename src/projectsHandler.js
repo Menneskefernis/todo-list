@@ -5,7 +5,14 @@ const Projects = (() => {
   let activeProject;
 
   const add = project => {
-    projects.unshift(project);
+    projects.push(project);
+    projects.sort(compare);
+  }
+
+  const compare = (a, b) => {
+    if (a.title.toLowerCase() > b.title.toLowerCase()) return -1;
+    if ( b.title.toLowerCase() > a.title.toLowerCase()) return 1;
+    return 0
   }
 
   const remove = id => {
