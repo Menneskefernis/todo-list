@@ -25,7 +25,7 @@ const project = (title) => {
     activeTodo = todo;
   }
 
-  const getActiveTodo = (todo) => {
+  const getActiveTodo = () => {
     return activeTodo;
   }
 
@@ -39,7 +39,7 @@ const project = (title) => {
     return todos.findIndex(todo => todo.id === id);
   }
 
-  return {title, id, getTodos, addTodo, findTodo, removeTodo, setTodoPriority, setActiveTodo, getActiveTodo};
+  return {title, id, todos, getTodos, addTodo, findTodo, removeTodo, setTodoPriority, setActiveTodo, getActiveTodo};
 }
 
 export default project;

@@ -20,6 +20,7 @@ const ProjectsView = (() => {
   }
 
   const select = (project) => {
+    
     const projectNodes = Array.from(elements.projectList.children);
     
     projectNodes.forEach(node => node.classList.remove('active'));

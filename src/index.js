@@ -14,6 +14,7 @@ const ProjectController = (() => {
     ProjectsView.render(Projects.get());
     openProject(proj);
     elements.addProjectForm.reset();
+    Projects.saveToLocalStorage();
   }
   
   const openProject = (input) => {
@@ -42,6 +43,7 @@ const ProjectController = (() => {
     Projects.remove(id);
     ProjectsView.render(Projects.get());
     TodosView.render();
+    Projects.saveToLocalStorage();
   }
 
   return {addProject, deleteProject, openProject};
@@ -93,6 +95,7 @@ const TodoController = (() => {
   
     TodosView.render(proj.getTodos());
     elements.addTodoForm.reset();
+    Projects.saveToLocalStorage();
   }
   
   const deleteTodo = (e) => {
@@ -104,6 +107,7 @@ const TodoController = (() => {
     project.removeTodo(id);
     TodosView.render(project.getTodos());
     closeTodo();
+    Projects.saveToLocalStorage();
   }
   
   const changePriority = (e) => {
@@ -162,44 +166,66 @@ const DetailsController = (() => {
   return {editTodo, saveEdit};
 })();
 
-
-const Init = () => {
-  const item1 = todo(
-    'Make a note',
-    'I have to remember to make a note of something important',
-    '2020-05-06'
-  );
-
-  const item2 = todo(
-    'Make another note',
-    'This is a less important todo',
-    '2020-05-03'
-  );
-
-  const item3 = todo(
-    'This is third todo',
-    'Drink a beer and relax',
-    '2022-11-01'
-  );
+const LoadingController = (() => {
+  const firstTimeSetup = () => {
+    //const item1 = todo(
+    //  'Make a note',
+    //  'I have to remember to make a note of something important',
+    //  '2020-05-06'
+    //);
+    //
+    //const item2 = todo(
+    //  'Make another note',
+    //  'This is a less important todo',
+    //  '2020-05-03'
+    //);
+    //
+    //const item3 = todo(
+    //  'This is third todo',
+    //  'Drink a beer and relax',
+    //  '2022-11-01'
+    //);
   
-  const proj1 = project('My First Project');
-  const proj2 = project('My Second Project');
-
-  proj1.addTodo(item1);
-  proj1.addTodo(item2);
-
-  proj2.addTodo(item3);
-
-  Projects.add(proj1);
-  Projects.add(proj2);
-  ProjectsView.render(Projects.get());
-
-  Projects.setActive(proj1);
-  ProjectsView.select(proj1);
-  TodosView.render(proj1.getTodos());
-};
-
-Init();
+    const proj1 = project('My First Project');
+    //const proj2 = project('My Second Project');
+    //proj1.addTodo(item1);
+    //proj1.addTodo(item2);
+    //proj2.addTodo(item3);
+    Projects.add(proj1);
+    //Projects.add(proj2);
+    ProjectsView.render(Projects.get());
+    Projects.setActive(proj1);
+    ProjectsView.select(proj1);
+    TodosView.render(proj1.getTodos());
+    Projects.saveToLocalStorage();
+  }
+  
+  const loadProjects = (projects) => {
+    projects.forEach(projectItem => {
+      
+      const proj = Projects.add(project(projectItem.title));
+      projectItem.todos.forEach(todoItem => {
+        
+        proj.addTodo(
+          todo(
+            todoItem.title,
+            todoItem.description,
+            todoItem.dueDate
+          )
+        );
+      })
+  
+    });
+    ProjectsView.render(Projects.get());
+  }
+  
+  const init = () => {
+    const projects = Projects.getFromLocalStorage();
+    !projects ? firstTimeSetup() : loadProjects(projects);
+    //if (projects.length === 1) ProjectController.openProject(projects[0]);
+  };
+  return {init};
+})();
 
 elements.addProjectBtn.addEventListener('click', ProjectController.addProject);
 elements.projectList.addEventListener('click', ProjectController.openProject);
@@ -212,3 +238,6 @@ elements.addTodoBtn.addEventListener('click', TodoController.addTodo);
 elements.closeDetailsBtn.addEventListener('click', TodoController.closeTodo);
 elements.detailsList.addEventListener('click', DetailsController.editTodo);
 elements.detailsList.addEventListener('click', DetailsController.saveEdit);
+
+LoadingController.init();
+window.onload = Projects.getFromLocalStorage();

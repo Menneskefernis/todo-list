@@ -7,12 +7,13 @@ const Projects = (() => {
   const add = project => {
     projects.push(project);
     projects.sort(compare);
+    return project;
   }
 
   const compare = (a, b) => {
     if (a.title.toLowerCase() > b.title.toLowerCase()) return -1;
     if ( b.title.toLowerCase() > a.title.toLowerCase()) return 1;
-    return 0
+    return 0;
   }
 
   const remove = id => {
@@ -37,7 +38,16 @@ const Projects = (() => {
     return activeProject;
   }
 
-  return {add, remove, get, find, setActive, getActive};
+  const saveToLocalStorage = () => {
+    const string = JSON.stringify(projects);
+    localStorage.setItem('Projects', string);
+  }
+
+  const getFromLocalStorage = () => {
+    return JSON.parse(localStorage.getItem('Projects'));    
+  }
+
+  return {add, remove, get, find, setActive, getActive, saveToLocalStorage, getFromLocalStorage};
 })();
 
 export default Projects;
