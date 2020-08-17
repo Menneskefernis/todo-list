@@ -161,7 +161,7 @@ const DetailsController = (() => {
     todo.description = inputValues['edit-description'].value;
     
     DetailsView.showDetails(todo);
-    TodosView.render(activeProject.getTodos());
+    TodosView.render(activeProject.getTodos()); //setactive todo
   }
   return {editTodo, saveEdit};
 })();
