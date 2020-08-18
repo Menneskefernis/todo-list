@@ -23,6 +23,7 @@ const ProjectController = (() => {
     
     Projects.setActive(project);
     ProjectsView.select(project);
+    
     TodosView.render(project.getTodos());
     TodoController.closeTodo();
   }
@@ -61,13 +62,14 @@ const TodoController = (() => {
       closeTodo();
       return true;
     } else {
-      openTodo(element);
+      const id = element.dataset.id;
+      openTodo(id);
     }
   }
   
-  const openTodo = (element) => {
-    TodosView.setActive(element);
-    const id = element.dataset.id;
+  const openTodo = (id) => {
+    TodosView.setActive(id);
+    
     const activeProject = Projects.getActive();
     const todo = activeProject.findTodo(id);
     
@@ -161,7 +163,8 @@ const DetailsController = (() => {
     todo.description = inputValues['edit-description'].value;
     
     DetailsView.showDetails(todo);
-    TodosView.render(activeProject.getTodos()); //setactive todo
+    TodosView.render(activeProject.getTodos());
+    TodosView.setActive(todo.id);
   }
   return {editTodo, saveEdit};
 })();
@@ -197,13 +200,14 @@ const LoadingController = (() => {
     Projects.setActive(proj1);
     ProjectsView.select(proj1);
     TodosView.render(proj1.getTodos());
-    Projects.saveToLocalStorage();
+    //Projects.saveToLocalStorage();
   }
   
   const loadProjects = (projects) => {
     projects.forEach(projectItem => {
       
       const proj = Projects.add(project(projectItem.title));
+      proj.id = projectItem.id;
       projectItem.todos.forEach(todoItem => {
         
         proj.addTodo(
@@ -222,7 +226,7 @@ const LoadingController = (() => {
   const init = () => {
     const projects = Projects.getFromLocalStorage();
     !projects ? firstTimeSetup() : loadProjects(projects);
-    //if (projects.length === 1) ProjectController.openProject(projects[0]);
+    ProjectController.openProject(Projects.get()[Projects.get().length - 1]);
   };
   return {init};
 })();

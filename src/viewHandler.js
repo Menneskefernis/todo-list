@@ -115,9 +115,10 @@ const TodosView = (() => {
     todoNode.classList.contains('completed') ? checkmarkNode.innerHTML = '<i class="far fa-check-square"></i>' : checkmarkNode.innerHTML = '<i class="far fa-square "></i>';
   }
 
-  const setActive = (element) => {
+  const setActive = (id) => {
     clearActiveTodo();
-    element.classList.add('active');
+    const todo = document.querySelector(`[data-id="${id}"]`);
+    todo.classList.add('active');
   }
 
   const clearActiveTodo = () => {

@@ -7,6 +7,7 @@ const project = (title) => {
 
   const addTodo = (todo) => {
     todos.unshift(todo);
+    return todo;
   }
 
   const removeTodo = (id) => {
