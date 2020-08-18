@@ -1,5 +1,3 @@
-import project from "./project";
-
 const Projects = (() => {
   const projects = [];
   let activeProject;
@@ -11,8 +9,8 @@ const Projects = (() => {
   }
 
   const compare = (a, b) => {
-    if (a.title.toLowerCase() > b.title.toLowerCase()) return -1;
-    if ( b.title.toLowerCase() > a.title.toLowerCase()) return 1;
+    if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
+    if ( b.title.toLowerCase() > a.title.toLowerCase()) return -1;
     return 0;
   }
 

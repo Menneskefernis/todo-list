@@ -120,6 +120,7 @@ const TodoController = (() => {
   
       project.setTodoPriority(id, getDirection(target));
       TodosView.render(project.getTodos());
+      Projects.saveToLocalStorage();
   }
   
   const getDirection = (target) => {
@@ -136,9 +137,10 @@ const TodoController = (() => {
     if (!target.matches('.checkmark, .checkmark *')) return;
     const id = target.closest('li').dataset.id;
     const todo = Projects.getActive().findTodo(id);
-    todo.completed() ? todo.setCompleted(false) : todo.setCompleted(true);
+    todo.completed ? todo.completed = false : todo.completed = true;
   
     TodosView.toggleChecked(id);
+    Projects.saveToLocalStorage();
   }
 
   return {addTodo, closeTodo, toggleOpen, deleteTodo, changePriority, toggleCompleted}
@@ -165,6 +167,7 @@ const DetailsController = (() => {
     DetailsView.showDetails(todo);
     TodosView.render(activeProject.getTodos());
     TodosView.setActive(todo.id);
+    Projects.saveToLocalStorage();
   }
   return {editTodo, saveEdit};
 })();
@@ -174,19 +177,22 @@ const LoadingController = (() => {
     //const item1 = todo(
     //  'Make a note',
     //  'I have to remember to make a note of something important',
-    //  '2020-05-06'
+    //  '2020-05-06',
+    //  false
     //);
     //
     //const item2 = todo(
     //  'Make another note',
     //  'This is a less important todo',
-    //  '2020-05-03'
+    //  '2020-05-03',
+    //  true
     //);
     //
     //const item3 = todo(
     //  'This is third todo',
     //  'Drink a beer and relax',
-    //  '2022-11-01'
+    //  '2022-11-01',
+    //  false
     //);
   
     const proj1 = project('My First Project');
@@ -214,9 +220,11 @@ const LoadingController = (() => {
           todo(
             todoItem.title,
             todoItem.description,
-            todoItem.dueDate
+            todoItem.dueDate,
+            todoItem.completed
           )
         );
+        
       })
   
     });
@@ -226,7 +234,7 @@ const LoadingController = (() => {
   const init = () => {
     const projects = Projects.getFromLocalStorage();
     !projects ? firstTimeSetup() : loadProjects(projects);
-    ProjectController.openProject(Projects.get()[Projects.get().length - 1]);
+    ProjectController.openProject(Projects.get()[0]);
   };
   return {init};
 })();

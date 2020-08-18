@@ -16,7 +16,7 @@ const ProjectsView = (() => {
         </div>
       </li>
     `;
-    elements.projectList.insertAdjacentHTML('afterbegin', markup);
+    elements.projectList.insertAdjacentHTML('beforeend', markup);
   }
 
   const select = (project) => {
@@ -79,7 +79,7 @@ const TodosView = (() => {
         
         <div>
           <h4>${todo.title}</h4>
-          <p>Duedate: <em>${formatDistanceToNow(new Date(todo.dueDate), { addSuffix: true })}</em></p>
+          <p><em>Due ${formatDistanceToNow(new Date(todo.dueDate), { addSuffix: true })}</em></p>
         </div>
         <div class="checkmark">
           <i class="far fa-square "></i>
@@ -91,7 +91,7 @@ const TodosView = (() => {
       </li>
     `;
     elements.todoList.insertAdjacentHTML('afterbegin', markup);
-    if (todo.completed()) toggleChecked(todo.id);
+    if (todo.completed) toggleChecked(todo.id);
   }
 
   const insertCarets = (priority) => {

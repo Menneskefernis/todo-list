@@ -6,7 +6,7 @@ const project = (title) => {
   let activeTodo;
 
   const addTodo = (todo) => {
-    todos.unshift(todo);
+    todos.push(todo);
     return todo;
   }
 
@@ -38,6 +38,13 @@ const project = (title) => {
 
   const findTodoIndex = (id) => {
     return todos.findIndex(todo => todo.id === id);
+  }
+
+  const toJSON = () => {
+    return {
+      title,
+      todos
+    };
   }
 
   return {title, id, todos, getTodos, addTodo, findTodo, removeTodo, setTodoPriority, setActiveTodo, getActiveTodo};
