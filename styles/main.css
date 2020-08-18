@@ -59,6 +59,7 @@ body {
 }
 
 header {
+  /*background-image: linear-gradient(to right, $lightBlue, steelblue);*/
   background: skyblue;
   height: 100px;
   -webkit-box-pack: start;
@@ -70,12 +71,16 @@ header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-shadow: 0 4px 4px -4px black inset;
+          box-shadow: 0 4px 4px -4px black inset;
 }
 
 header h1 {
   margin-left: 20px;
   font-size: 48px;
   font-family: 'Gloria Hallelujah', cursive;
+  color: steelblue;
+  font-weight: bold;
 }
 
 button {
@@ -232,12 +237,17 @@ textarea:focus {
   margin-left: 20px;
 }
 
-#content #todo-list {
+#content #todos {
+  -webkit-box-shadow: 0 0 6px black inset;
+          box-shadow: 0 0 6px black inset;
+}
+
+#content #todos #todo-list {
   margin: 40px 40px 0;
   text-align: center;
 }
 
-#content #todo-list .todo {
+#content #todos #todo-list .todo {
   position: relative;
   text-align: initial;
   position: relative;
@@ -262,33 +272,33 @@ textarea:focus {
   margin-bottom: 10px;
 }
 
-#content #todo-list .todo.completed {
+#content #todos #todo-list .todo.completed {
   background: skyblue;
 }
 
-#content #todo-list .todo.completed .checkmark {
+#content #todos #todo-list .todo.completed .checkmark {
   color: #f8f8f8;
 }
 
-#content #todo-list .todo.active, #content #todo-list .todo:hover {
+#content #todos #todo-list .todo.active, #content #todos #todo-list .todo:hover {
   -webkit-box-shadow: 2px 2px 3px skyblue inset, -2px -2px 3px skyblue inset;
           box-shadow: 2px 2px 3px skyblue inset, -2px -2px 3px skyblue inset;
 }
 
-#content #todo-list .todo p {
+#content #todos #todo-list .todo p {
   margin-top: 10px;
 }
 
-#content #todo-list .todo p em {
+#content #todos #todo-list .todo p em {
   font-style: italic;
 }
 
-#content #todo-list .todo input {
+#content #todos #todo-list .todo input {
   width: 30px;
   cursor: pointer;
 }
 
-#content #todo-list .todo .del-todo-btn {
+#content #todos #todo-list .todo .del-todo-btn {
   position: absolute;
   color: rgba(0, 0, 0, 0);
   right: 6px;
@@ -297,18 +307,18 @@ textarea:focus {
   transition: all 0.3s;
 }
 
-#content #todo-list .todo:hover .del-todo-btn {
+#content #todos #todo-list .todo:hover .del-todo-btn {
   color: #323232;
 }
 
-#content #todo-list .todo .checkmark {
+#content #todos #todo-list .todo .checkmark {
   margin-right: 20px;
   font-size: 35px;
   color: skyblue;
 }
 
-#content #todo-list .todo .fa-caret-up,
-#content #todo-list .todo .fa-caret-down {
+#content #todos #todo-list .todo .fa-caret-up,
+#content #todos #todo-list .todo .fa-caret-down {
   position: absolute;
   left: -25px;
   color: rgba(0, 0, 0, 0);
@@ -317,20 +327,20 @@ textarea:focus {
   font-size: 25px;
 }
 
-#content #todo-list .todo .fa-caret-up {
+#content #todos #todo-list .todo .fa-caret-up {
   top: 10px;
 }
 
-#content #todo-list .todo .fa-caret-down {
+#content #todos #todo-list .todo .fa-caret-down {
   bottom: 10px;
 }
 
-#content #todo-list .todo:hover .fa-caret-up,
-#content #todo-list .todo:hover .fa-caret-down {
+#content #todos #todo-list .todo:hover .fa-caret-up,
+#content #todos #todo-list .todo:hover .fa-caret-down {
   color: skyblue;
 }
 
-#content #todo-list #default {
+#content #todos #todo-list #default {
   display: inline-block;
   background: #f8f8f8;
   border-radius: 4px;
@@ -359,8 +369,8 @@ textarea:focus {
 
 #content #details.overlay {
   width: 400px;
-  -webkit-box-shadow: -1px 0 2px skyblue;
-          box-shadow: -1px 0 2px skyblue;
+  -webkit-box-shadow: 0 0 4px black;
+          box-shadow: 0 0 4px black;
   padding: 0 20px 20px 20px;
   border-radius: 8px 0 0;
 }

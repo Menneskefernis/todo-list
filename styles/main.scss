@@ -59,16 +59,20 @@ body {
 }
 
 header {
+  /*background-image: linear-gradient(to right, $lightBlue, steelblue);*/
   background: $lightBlue;
   height: 100px;
   justify-content: start;
   align-items: center;
   display: flex;
+  box-shadow: 0 4px 4px -4px black inset;
 
   h1 {
     margin-left: 20px;
     font-size: 48px;
     font-family: 'Gloria Hallelujah', cursive;
+    color: steelblue;
+    font-weight: bold;
   }
 }
 
@@ -211,110 +215,113 @@ textarea {
     }
   }
 
-  #todo-list {
-    margin: 40px 40px 0;
-    text-align: center;
+  #todos {
+    box-shadow: 0 0 6px black inset;
+  
 
-    .todo {
-      position: relative;
-      text-align: initial;
-      position: relative;
-      display: grid;
-      grid-template-columns: auto auto;
-      justify-content: space-between;
-      align-items: center;
-      border: 1px solid $lightBlue;
-      border-radius: 4px;
-      padding: 15px;
-      cursor: pointer;
-      box-shadow: none;
-      transition: $transition;
-      margin-bottom: 10px;
+    #todo-list {
+      margin: 40px 40px 0;
+      text-align: center;
 
-      &.completed {
-        background: $lightBlue;
+      .todo {
+        position: relative;
+        text-align: initial;
+        position: relative;
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid $lightBlue;
+        border-radius: 4px;
+        padding: 15px;
+        cursor: pointer;
+        box-shadow: none;
+        transition: $transition;
+        margin-bottom: 10px;
+
+        &.completed {
+          background: $lightBlue;
+
+          .checkmark {
+            color: $white;
+          }
+        }
+
+        &.active,
+        &:hover {
+          box-shadow: 2px 2px 3px $lightBlue inset, -2px -2px 3px $lightBlue inset;
+        }
+
+        p {
+          margin-top: 10px;
+
+          em {
+            font-style: italic;
+          }
+        }
+
+        input {
+          width: 30px;
+          cursor: pointer;
+        }
+
+        .del-todo-btn {
+          position: absolute;
+          color: rgba(0, 0, 0, 0);
+          right: 6px;
+          top: 3px;
+          transition: $transition;
+        }
+
+        &:hover .del-todo-btn {
+          color: rgba(50, 50, 50, 1);
+        }
 
         .checkmark {
-          color: $white;
+          margin-right: 20px;
+          font-size: 35px;
+          color: $lightBlue;
+        }
+
+        .fa-caret-up,
+        .fa-caret-down {
+          position: absolute;
+          left: -25px;
+          color: rgba(0, 0, 0, 0);
+          transition: $transition;
+          font-size: 25px;
+        }
+
+        .fa-caret-up {
+          top: 10px;
+        }
+
+        .fa-caret-down {
+          bottom: 10px;
+        }
+
+        &:hover .fa-caret-up,
+        &:hover .fa-caret-down {
+          color: $lightBlue;
         }
       }
 
-      &.active,
-      &:hover {
-        box-shadow: 2px 2px 3px $lightBlue inset, -2px -2px 3px $lightBlue inset;
+      #default {
+        display: inline-block;
+        background: $white;
+        border-radius: 4px;
+        margin-top: 150px;
+        padding: 20px 40px;
+        font-size: 28px;
+        text-align: center;
+        line-height: 2;
       }
-
-      p {
-        margin-top: 10px;
-        
-        em {
-          font-style: italic;
-        }
-      }
-
-      input {
-        width: 30px;
-        cursor: pointer;
-      }
-
-      .del-todo-btn {
-        position: absolute;
-        color: rgba(0, 0, 0, 0);
-        right: 6px;
-        top: 3px;
-        transition: $transition;
-      }
-
-      &:hover .del-todo-btn {
-        color: rgba(50, 50, 50, 1);
-      }
-
-      .checkmark {
-        margin-right: 20px;
-        font-size: 35px;
-        color: $lightBlue;
-      }
-
-      .fa-caret-up,
-      .fa-caret-down {
-        position: absolute;
-        left: -25px;
-        color: rgba(0, 0, 0, 0);
-        transition: $transition;
-        font-size: 25px;
-      }
-
-      .fa-caret-up {
-        top: 10px;
-      }
-
-      .fa-caret-down {
-        bottom: 10px;
-      }
-
-      &:hover .fa-caret-up,
-      &:hover .fa-caret-down {
-        color: $lightBlue;
-      }
-    }
-
-    #default {
-      display: inline-block;
-      background: $white;
-      border-radius: 4px;
-      margin-top: 150px;
-      padding: 20px 40px;
-      font-size: 28px;
-      text-align: center;
-      line-height: 2;
     }
   }
 
   #add {
     background: $white;
     padding: 0 20px 20px 20px;
-
-
   }
 
   #details {
@@ -326,11 +333,9 @@ textarea {
     transition: $transition;
     overflow: hidden;
 
-
-
     &.overlay {
       width: 400px;
-      box-shadow: -1px 0 2px $lightBlue;
+      box-shadow: 0 0 4px black;
       padding: 0 20px 20px 20px;
       border-radius: 8px 0 0;
     }
