@@ -1,4 +1,4 @@
-import {formatDistanceToNow, lightFormat} from 'date-fns';
+import {formatDistanceToNow, format} from 'date-fns';
 import elements from './base';
 
 const ProjectsView = (() => {
@@ -156,7 +156,7 @@ const DetailsView = (() => {
       </div>
       <div>
         <h5>Due date:</h5>
-        <p>${todo.dueDate}</p>
+        <p>${format(new Date(todo.dueDate), "EEEE do 'of' LLLL yyyy")}</p>
       </div>
       <button id="edit-btn">EDIT</button>
     `;
