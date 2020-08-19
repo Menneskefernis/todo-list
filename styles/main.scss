@@ -55,6 +55,7 @@ $transition: all 0.3s;
 }
 
 body {
+  position: relative;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -366,4 +367,13 @@ textarea {
       }
     }
   }
+}
+
+#popup {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background: white;
+  box-shadow: 0 -2px 4px $lightBlue;
 }
