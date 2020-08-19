@@ -2,7 +2,7 @@ import todo from './todo';
 import elements from './base';
 import project from './project';
 import Projects from './projectsHandler';
-import {ProjectsView, TodosView, DetailsView, AddTodoView} from './viewHandler';
+import {ProjectsView, TodosView, DetailsView, AddTodoView, Popup} from './viewHandler';
 
 const ProjectController = (() => {
   const addProject = (e) => {
@@ -36,8 +36,7 @@ const ProjectController = (() => {
     return Projects.find(id);
   }
   
-  const deleteProject = (e) => {
-    const target = e.target;
+  const deleteProject = (target) => {
     if (!target.matches('.del-project-btn, .del-project-btn *')) return;
     const id = target.closest('li').dataset.id;
     
@@ -100,8 +99,7 @@ const TodoController = (() => {
     Projects.saveToLocalStorage();
   }
   
-  const deleteTodo = (e) => {
-    const target = e.target;
+  const deleteTodo = (target) => {
     if (!target.matches('.del-todo-btn, .del-todo-btn *')) return;
     
     const id = target.closest('li').dataset.id;
@@ -172,6 +170,8 @@ const DetailsController = (() => {
   return {editTodo, saveEdit};
 })();
 
+
+
 const LoadingController = (() => {
   const firstTimeSetup = () => {
     //const item1 = todo(
@@ -239,17 +239,35 @@ const LoadingController = (() => {
   return {init};
 })();
 
+
+const PopupController = (() => {
+  let target;
+  const openPopup = (e) => {
+    target = e.target;
+    if (!target.matches('.del-project-btn, .del-project-btn *, .del-todo-btn, .del-todo-btn *')) return;
+    target.closest('ul').id === 'project-list' ? Popup.open('project') : Popup.open('to-do');
+  }
+
+  const handleDeletion = () => {
+    Popup.close();
+    target.closest('ul').id === 'project-list' ? ProjectController.deleteProject(target) : TodoController.deleteTodo(target);
+  }
+  return {openPopup, handleDeletion};
+})();
+
 elements.addProjectBtn.addEventListener('click', ProjectController.addProject);
 elements.projectList.addEventListener('click', ProjectController.openProject);
-elements.projectList.addEventListener('click', ProjectController.deleteProject);
+elements.projectList.addEventListener('click', PopupController.openPopup);
 elements.todoList.addEventListener('click', TodoController.toggleOpen);
-elements.todoList.addEventListener('click', TodoController.deleteTodo);
+elements.todoList.addEventListener('click', PopupController.openPopup);
 elements.todoList.addEventListener('click', TodoController.changePriority);
 elements.todoList.addEventListener('click', TodoController.toggleCompleted);
 elements.addTodoBtn.addEventListener('click', TodoController.addTodo);
 elements.closeDetailsBtn.addEventListener('click', TodoController.closeTodo);
 elements.detailsList.addEventListener('click', DetailsController.editTodo);
 elements.detailsList.addEventListener('click', DetailsController.saveEdit);
+elements.deleteNoBtn.addEventListener('click', Popup.close);
+elements.deleteYesBtn.addEventListener('click', PopupController.handleDeletion);
 
 LoadingController.init();
 window.onload = Projects.getFromLocalStorage();

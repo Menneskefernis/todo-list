@@ -47,6 +47,7 @@ table {
 
 $white: rgba(248, 248, 248, 1);
 $lightBlue: rgba(135, 206, 235, 1);
+$darkBlue: rgb(70, 130, 180);
 $transition: all 0.3s;
 
 
@@ -60,7 +61,7 @@ body {
 }
 
 header {
-  /*background-image: linear-gradient(to right, $lightBlue, steelblue);*/
+  /*background-image: linear-gradient(to right, $lightBlue, $darkBlue);*/
   background: $lightBlue;
   height: 100px;
   justify-content: start;
@@ -72,7 +73,7 @@ header {
     margin-left: 20px;
     font-size: 48px;
     font-family: 'Gloria Hallelujah', cursive;
-    color: steelblue;
+    color: $darkBlue;
     font-weight: bold;
   }
 }
@@ -104,19 +105,19 @@ textarea {
   }
 }
 
+h2 {
+  text-align: center;
+  font-size: 22px;
+  margin: 20px 0;
+  font-weight: bold;
+}
+
 #content {
   position: relative;
   display: grid;
   grid-template-columns: 400px auto 400px;
-  height: 100vh;
+  min-height: calc(100vh - 100px);
   width: 100%;
-
-  h2 {
-    text-align: center;
-    font-size: 22px;
-    margin: 20px 0;
-    font-weight: bold;
-  }
 
   h4 {
     font-weight: bold;
@@ -153,7 +154,7 @@ textarea {
 
   #projects {
     display: block;
-    background: steelblue;
+    background: $darkBlue;
     height: 100%;
     color: $white;
     font-weight: bold;
@@ -161,6 +162,7 @@ textarea {
     #add-project {
       padding: 0 20px 20px 20px;
       border-bottom: 1px solid $lightBlue;
+      
       form {
         display: flex;
         height: 30px;
@@ -184,18 +186,18 @@ textarea {
         justify-content: space-between;
         padding: 20px 20px 20px 0;
         border-bottom: 1px solid $lightBlue;
-        background: steelblue;
+        background: $darkBlue;
         font-size: 18px;
         cursor: pointer;
         transition: $transition;
         box-shadow: none;
 
         &:hover {
-          
           box-shadow: 0 2px 2px $white inset, 0 -2px 2px $white inset;
         }
 
         &.active {
+          color: $darkBlue;
           background: $lightBlue;
           box-shadow: 0 2px 2px $white inset, 0 -2px 2px $white inset;
         }
@@ -217,8 +219,7 @@ textarea {
   }
 
   #todos {
-    box-shadow: 0 0 6px black inset;
-  
+    box-shadow: inset 0 7px 9px -7px rgba(0,0,0,0.5), inset 7px 0 9px -7px rgba(0,0,0,0.5), inset -7px 0 9px -7px rgba(0,0,0,0.5);
 
     #todo-list {
       margin: 40px 40px 0;
@@ -363,17 +364,54 @@ textarea {
 
         p {
           overflow-wrap: break-word;
+          line-height: 1.5;
         }
       }
     }
   }
 }
 
-#popup {
+#overlay {
+  visibility: hidden;
   position: absolute;
+  top: 0;
   bottom: 0;
-  width: 100%;
-  text-align: center;
-  background: white;
-  box-shadow: 0 -2px 4px $lightBlue;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.3);
+
+  &.open {
+    visibility: visible;
+  }
+
+  &.open #popup {
+    height: 180px;
+    box-shadow: 0 -2px 4px $lightBlue;
+  }
+
+  #popup {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background: white;
+    height: 0;
+    transition: all 0.3s;
+  
+    h2 {
+      margin-top: 30px;
+    }
+
+    button {
+      margin: 30px 15px;
+  
+      &#delete-no {
+        background: rgb(180, 92, 70);
+      }
+  
+      &#delete-yes {
+        background: $darkBlue;
+      }
+    }
+  }
 }

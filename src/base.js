@@ -10,7 +10,11 @@ const elements = {
   addTodoBtn: document.querySelector('#add button'),
   detailsOverlay: document.getElementById('details'),
   detailsList: document.getElementById('details-list'),
-  closeDetailsBtn: document.getElementById('close-details-btn')
+  closeDetailsBtn: document.getElementById('close-details-btn'),
+  popup: document.getElementById('overlay'),
+  popupText: document.getElementById('popup-text'),
+  deleteNoBtn: document.getElementById('delete-no'),
+  deleteYesBtn: document.getElementById('delete-yes')
 }
 
 export default elements;

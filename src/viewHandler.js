@@ -195,4 +195,17 @@ const DetailsView = (() => {
   return {showDetails, editDetails, hideDetails, getFormInput};
 })();
 
-export {ProjectsView, TodosView, AddTodoView, DetailsView};
+const Popup = (() => {
+  const open = (type) => {
+    elements.popupText.textContent = `Are you sure you want to delete this ${type}?`;
+    elements.popup.classList.add('open');
+  }
+
+  const close = () => {
+    elements.popup.classList.remove('open');
+  }
+
+  return {open, close};
+})();
+
+export {ProjectsView, TodosView, AddTodoView, DetailsView, Popup};
