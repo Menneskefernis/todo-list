@@ -241,6 +241,10 @@ h2 {
         transition: $transition;
         margin-bottom: 10px;
 
+        .fade {
+          
+        }
+
         &.completed {
           background: $lightBlue;
 
