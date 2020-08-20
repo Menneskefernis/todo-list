@@ -24,7 +24,7 @@ const ProjectController = (() => {
     Projects.setActive(project);
     ProjectsView.select(project);
     
-    TodosView.render(project.getTodos());
+    TodosView.render(project.todos);
     TodoController.closeTodo();
   }
   
@@ -94,7 +94,7 @@ const TodoController = (() => {
       )
     );
   
-    TodosView.render(proj.getTodos());
+    TodosView.render(proj.todos);
     elements.addTodoForm.reset();
     Projects.saveToLocalStorage();
   }
@@ -105,7 +105,7 @@ const TodoController = (() => {
     const id = target.closest('li').dataset.id;
     const project = Projects.getActive();
     project.removeTodo(id);
-    TodosView.render(project.getTodos());
+    TodosView.render(project.todos);
     closeTodo();
     Projects.saveToLocalStorage();
   }
@@ -117,7 +117,7 @@ const TodoController = (() => {
       const project = Projects.getActive();
   
       project.setTodoPriority(id, getDirection(target));
-      TodosView.render(project.getTodos());
+      TodosView.render(project.todos);
       Projects.saveToLocalStorage();
   }
   
@@ -163,50 +163,37 @@ const DetailsController = (() => {
     todo.description = inputValues['edit-description'].value;
     
     DetailsView.showDetails(todo);
-    TodosView.render(activeProject.getTodos());
+    TodosView.render(activeProject.todos);
     TodosView.setActive(todo.id);
     Projects.saveToLocalStorage();
   }
   return {editTodo, saveEdit};
 })();
 
+const PopupController = (() => {
+  let target;
+  const openPopup = (e) => {
+    target = e.target;
+    if (!target.matches('.del-project-btn, .del-project-btn *, .del-todo-btn, .del-todo-btn *')) return;
+    target.closest('ul').id === 'project-list' ? Popup.open('project') : Popup.open('to-do');
+  }
+
+  const handleDeletion = () => {
+    Popup.close();
+    target.closest('ul').id === 'project-list' ? ProjectController.deleteProject(target) : TodoController.deleteTodo(target);
+  }
+  return {openPopup, handleDeletion};
+})();
 
 
 const LoadingController = (() => {
   const firstTimeSetup = () => {
-    //const item1 = todo(
-    //  'Make a note',
-    //  'I have to remember to make a note of something important',
-    //  '2020-05-06',
-    //  false
-    //);
-    //
-    //const item2 = todo(
-    //  'Make another note',
-    //  'This is a less important todo',
-    //  '2020-05-03',
-    //  true
-    //);
-    //
-    //const item3 = todo(
-    //  'This is third todo',
-    //  'Drink a beer and relax',
-    //  '2022-11-01',
-    //  false
-    //);
-  
     const proj1 = project('My First Project');
-    //const proj2 = project('My Second Project');
-    //proj1.addTodo(item1);
-    //proj1.addTodo(item2);
-    //proj2.addTodo(item3);
     Projects.add(proj1);
-    //Projects.add(proj2);
     ProjectsView.render(Projects.get());
     Projects.setActive(proj1);
     ProjectsView.select(proj1);
-    TodosView.render(proj1.getTodos());
-    //Projects.saveToLocalStorage();
+    TodosView.render(proj1.todos);
   }
   
   const loadProjects = (projects) => {
@@ -237,22 +224,6 @@ const LoadingController = (() => {
     ProjectController.openProject(Projects.get()[0]);
   };
   return {init};
-})();
-
-
-const PopupController = (() => {
-  let target;
-  const openPopup = (e) => {
-    target = e.target;
-    if (!target.matches('.del-project-btn, .del-project-btn *, .del-todo-btn, .del-todo-btn *')) return;
-    target.closest('ul').id === 'project-list' ? Popup.open('project') : Popup.open('to-do');
-  }
-
-  const handleDeletion = () => {
-    Popup.close();
-    target.closest('ul').id === 'project-list' ? ProjectController.deleteProject(target) : TodoController.deleteTodo(target);
-  }
-  return {openPopup, handleDeletion};
 })();
 
 elements.addProjectBtn.addEventListener('click', ProjectController.addProject);

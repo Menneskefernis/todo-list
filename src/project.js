@@ -47,7 +47,7 @@ const project = (title) => {
     };
   }
 
-  return {title, id, todos, getTodos, addTodo, findTodo, removeTodo, setTodoPriority, setActiveTodo, getActiveTodo};
+  return {title, id, todos, addTodo, findTodo, removeTodo, setTodoPriority, setActiveTodo, getActiveTodo};
 }
 
 export default project;
