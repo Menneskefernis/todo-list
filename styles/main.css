@@ -274,6 +274,14 @@ h2 {
   margin-bottom: 10px;
 }
 
+#content #todos #todo-list .todo.fade {
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
+#content #todos #todo-list .todo.fade * {
+  color: rgba(0, 0, 0, 0);
+}
+
 #content #todos #todo-list .todo.completed {
   background: skyblue;
 }

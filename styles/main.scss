@@ -241,8 +241,12 @@ h2 {
         transition: $transition;
         margin-bottom: 10px;
 
-        .fade {
-          
+        &.fade {
+          border: 1px solid rgba(0, 0, 0, 0);
+
+          * {
+            color: rgba(0, 0, 0, 0);
+          }
         }
 
         &.completed {
