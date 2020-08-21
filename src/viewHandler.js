@@ -108,7 +108,7 @@ const TodosView = (() => {
   }
 
   const toggleChecked = (id) => {
-    const todoNode = document.querySelector(`[data-id='${id}']`);
+    const todoNode = getTodoNode(id);
     const checkmarkNode = todoNode.querySelector('.checkmark');
     
     todoNode.classList.toggle('completed');
@@ -117,8 +117,12 @@ const TodosView = (() => {
 
   const setActive = (id) => {
     clearActiveTodo();
-    const todo = document.querySelector(`[data-id="${id}"]`);
-    todo.classList.add('active');
+    const todoNode = getTodoNode(id);
+    todoNode.classList.add('active');
+  }
+
+  const getTodoNode = (id) => {
+    return document.querySelector(`[data-id="${id}"]`);
   }
 
   const clearActiveTodo = () => {
@@ -126,7 +130,13 @@ const TodosView = (() => {
     todoNodes.forEach(node => node.classList.remove('active'));
   }
 
-  return {render, setActive, clearActiveTodo, toggleChecked};
+  const triggerFade = (id) => {
+    const todoNode = getTodoNode(id);
+    todoNode.classList.add('fade');
+    return todoNode;
+  }
+
+  return {render, setActive, clearActiveTodo, toggleChecked, triggerFade};
 })();
 
 const AddTodoView = (() => {
