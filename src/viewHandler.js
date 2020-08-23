@@ -130,13 +130,7 @@ const TodosView = (() => {
     todoNodes.forEach(node => node.classList.remove('active'));
   }
 
-  const triggerFade = (id) => {
-    const todoNode = getTodoNode(id);
-    todoNode.classList.add('fade');
-    return todoNode;
-  }
-
-  return {render, setActive, clearActiveTodo, toggleChecked, triggerFade};
+  return {render, setActive, clearActiveTodo, toggleChecked};
 })();
 
 const AddTodoView = (() => {

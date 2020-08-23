@@ -177,15 +177,9 @@ const PopupController = (() => {
 
   const handleDeletion = () => {
     Popup.close();
-    const id = target.closest('li').dataset.id;
-    const todoNode = TodosView.triggerFade(id);
-    todoNode.addEventListener('transitionend', (e) => {
-      if (e.propertyName === 'border-top-color') {
-        target.closest('ul').id === 'project-list' ?
-        ProjectController.deleteProject(target) :
-        TodoController.deleteTodo(target);
-      }
-    });
+    target.closest('ul').id === 'project-list' ?
+    ProjectController.deleteProject(target) :
+    TodoController.deleteTodo(target);
   };
   return {openPopup, handleDeletion};
 })();
